@@ -1,13 +1,11 @@
 //
-//  ViewController.swift
 //  TheChannels
 //
-//  Created by Shilp on 29/11/24.
+//  Created by Utsav on 29/11/24.
 //
-
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
