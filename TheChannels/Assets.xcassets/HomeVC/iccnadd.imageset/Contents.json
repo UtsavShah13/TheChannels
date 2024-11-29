@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "iccnadd.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
