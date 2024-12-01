@@ -4,6 +4,22 @@
 
 import Foundation
 
+
+struct StoryBoard {
+    static let main = "Main"
+}
+
+struct Controller {
+    static let homeVC = "HomeViewController"
+    static let onboardingVC = "OnboardingViewController"
+    static let settingVC = "SettingViewController"
+}
+
+struct Cell {
+    static let channelsCell = "ChannelsTableViewCell"
+    static let categoriesCell = "CategoriesCollectionViewCell"
+}
+
 struct AppConfigs
 {
     static let appName : String = "The Channels"

@@ -8,26 +8,37 @@ import Foundation
 import UIKit
 
 extension UIColor {
-    class var appColor: UIColor {
-        return UIColor(red: 244/255, green: 92/255, blue: 9/255, alpha: 1)
-    }
+    static func colorFromHex(_ hex: String, alpha: CGFloat = 1.0) -> UIColor? {
+        // Clean the hex string
+        var cleanedHexString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        if cleanedHexString.hasPrefix("#") {
+            cleanedHexString.removeFirst()
+        }
 
-    class var orangeColor: UIColor {
-        return UIColor(red: 244/255, green: 92/255, blue: 9/255, alpha: 1)
-    }
+        // Ensure valid length
+        guard cleanedHexString.count == 6 || cleanedHexString.count == 8 else {
+            return nil
+        }
 
-    class var redColor: UIColor {
-        return UIColor(red: 237/255, green: 58/255, blue: 59/255, alpha: 1)
-    }
+        // Convert hex string to UInt32
+        var hexValue: UInt32 = 0
+        Scanner(string: cleanedHexString).scanHexInt32(&hexValue)
 
-    class var grayColor: UIColor {
-        return UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-    }
+        // Extract color components
+        let red = CGFloat((hexValue >> 16) & 0xFF) / 255.0
+        let green = CGFloat((hexValue >> 8) & 0xFF) / 255.0
+        let blue = CGFloat(hexValue & 0xFF) / 255.0
 
-    class var greenColor: UIColor {
-        return UIColor(red: 80/255, green: 172/255, blue: 42/255, alpha: 1)
-    }
+        // Extract alpha if provided in the hex string
+        let extractedAlpha: CGFloat
+        if cleanedHexString.count == 8 {
+            extractedAlpha = CGFloat((hexValue >> 24) & 0xFF) / 255.0
+        } else {
+            extractedAlpha = alpha
+        }
 
+        return UIColor(red: red, green: green, blue: blue, alpha: extractedAlpha)
+    }
 }
 extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
