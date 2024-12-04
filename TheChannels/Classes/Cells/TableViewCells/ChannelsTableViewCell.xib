@@ -91,6 +91,7 @@
                 <outlet property="followButton" destination="ps2-FQ-0QL" id="6YU-Yp-Zzb"/>
                 <outlet property="followersLabel" destination="eyc-ER-z22" id="8ps-eZ-XBE"/>
                 <outlet property="nameLabel" destination="qou-FZ-6bk" id="7jI-y0-hWk"/>
+                <outlet property="varifiedImageView" destination="751-fr-Uhj" id="X5i-8Z-cA2"/>
             </connections>
             <point key="canvasLocation" x="63.358778625954194" y="27.464788732394368"/>
         </tableViewCell>

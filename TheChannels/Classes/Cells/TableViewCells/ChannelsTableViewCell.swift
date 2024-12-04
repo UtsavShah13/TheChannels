@@ -13,7 +13,9 @@ class ChannelsTableViewCell: UITableViewCell {
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var varifiedImageView: UIImageView!
     
+    var handleFollowButton: (() -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,5 +27,6 @@ class ChannelsTableViewCell: UITableViewCell {
     }
     
     @IBAction func folloAction(_ sender: UIButton) {
+        self.handleFollowButton?()
     }
 }

@@ -11,22 +11,22 @@ struct ChannelData : Codable {
     let channels : [Channel]?
     let success : String?
     let message : String?
-    let iS_SEARCH_PAID : String?
+    let isSearchPaid : String?
     let rFORR : String?
 
     enum CodingKeys: String, CodingKey {
 
-        case channels = "CATEGORIES"
+        case channels = "CHANNELS"
         case success = "SUCCESS"
         case message = "MESSAGE"
-        case iS_SEARCH_PAID = "IS_SEARCH_PAID"
+        case isSearchPaid = "IS_SEARCH_PAID"
         case rFORR = "RFORR"
     }
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         success = try values.decodeIfPresent(String.self, forKey: .success)
-        iS_SEARCH_PAID = try values.decodeIfPresent(String.self, forKey: .iS_SEARCH_PAID)
+        isSearchPaid = try values.decodeIfPresent(String.self, forKey: .isSearchPaid)
         rFORR = try values.decodeIfPresent(String.self, forKey: .rFORR)
         message = try values.decodeIfPresent(String.self, forKey: .message)
         channels = try values.decodeIfPresent([Channel].self, forKey: .channels)

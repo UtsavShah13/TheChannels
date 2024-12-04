@@ -32,7 +32,7 @@ extension NetworkManager {
     
     func getChannelsApi(param: [String: Any], completion: @escaping((_ result: [Channel]?) -> Void)) {
         
-        NetworkManager.shared.requestPost(path: API.getChannelList.rawValue, params: [:], contentType: .formUrlencoded, queryParams: param) { (result, error, _) in
+        NetworkManager.shared.requestPost(path: API.getChannelList.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
             guard error == nil, let data = result else {
                 Utils.alert(message: error?.localizedDescription ?? "Failed to fetch data")
                 Utils.hideSpinner()
@@ -47,7 +47,42 @@ extension NetworkManager {
             }
         }
     }
-
+    
+    func getSearchedChannelsApi(param: [String: Any], completion: @escaping((_ result: [Channel]?) -> Void)) {
+        
+        NetworkManager.shared.requestPost(path: API.searchChannel.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
+            guard error == nil, let data = result else {
+                Utils.alert(message: error?.localizedDescription ?? "Failed to fetch data")
+                Utils.hideSpinner()
+                completion(nil)
+                return
+            }
+            if let response: ChannelData = self.decodeObject(fromData: data), response.success == "1" {
+                completion(response.channels)
+            } else {
+                Utils.hideSpinner()
+                Utils.alert(message: error?.localizedDescription ?? "")
+            }
+        }
+    }
+    
+    func postFollowChannelsApi(param: [String: Any], completion: @escaping((_ result: String?) -> Void)) {
+        
+        NetworkManager.shared.requestPost(path: API.followChannel.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
+            guard error == nil, let data = result else {
+                Utils.alert(message: error?.localizedDescription ?? "Failed to fetch data")
+                Utils.hideSpinner()
+                completion(nil)
+                return
+            }
+            if let response: ChannelData = self.decodeObject(fromData: data), response.success == "1" {
+                completion(response.message)
+            } else {
+                Utils.hideSpinner()
+                Utils.alert(message: error?.localizedDescription ?? "")
+            }
+        }
+    }
 
 func handleError(_ message: String) {
     Utils.hideSpinner()

@@ -13,12 +13,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var channels: [Channel] = []
-//    ["AajTak","Sun News","RJ Kajal","Zee News","Times Now","The Wire"]
     var categories: [Categories] = []
-    
-//    ["General","Sports","Entertainment","Technology","Business","Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion", "Sports", "Entertainment", "Technology", "Business", "Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion"]
     var selectedCategory: Int?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +29,11 @@ class HomeViewController: UIViewController {
         setupCollectionView()
     }
     
-    
     func setupTableView() {
         tableView.register(cell: Cell.channelsCell)
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
     
     func setupCollectionView() {
         collectionView.register(cell: Cell.categoriesCell)
@@ -82,9 +76,18 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.channelsCell, for: indexPath) as? ChannelsTableViewCell else { return UITableViewCell() }
         cell.nameLabel.text = channels[indexPath.row].title
+        cell.followersLabel.text = channels[indexPath.row].title
+        if channels[indexPath.row].is_verified == "0" {
+            cell.varifiedImageView.isHidden = true
+        } else {
+            cell.varifiedImageView.isHidden = false
+        }
         cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
         cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
         cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
+        cell.handleFollowButton = { [self] in
+            followChannel(channelId: channels[indexPath.row].channel_id ?? "")
+        }
         return cell
     }
     

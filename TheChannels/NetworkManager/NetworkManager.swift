@@ -8,11 +8,17 @@ import UIKit
 import SystemConfiguration
 
 enum API: String {
-    case baseUrl = "https://appcodism.com/davidapps/thechannels/"
+    case baseUrl = "https://appcodism.com/davidapps/thechannels/index.php?function=getgroups"
     case channelCategory = "index.php?function=getcategories"
     case getChannelList = "index.php?function=getgroups"
+    case followChannel = "index.php?function=follow"
+    case exitChannel = "index.php?function=exit"
+    case viewChannel = "index.php?function=view"
+    case fowardChannel = "index.php?function=forward"
+    case searchChannel = "index.php?function=getchannels"
+    case addChannel = "index.php?function=addchannel"
 }
-// https://appcodism.com/davidapps/thechannels/index.php?function=getchannels&search_text=good&from=0
+
 enum ContentType: String {
     case none = ""
     case formData = "multipart/form-data"
@@ -119,7 +125,6 @@ class NetworkManager: NSObject {
                      params: Any,
                      secondoryId: String? = nil,
                      contentType: ContentType,
-                     queryParams: [String: Any]? = nil,
                      resultHandler: @escaping ResultClosure) {
 
         makeNetworkActivityHidden(false)
@@ -130,8 +135,7 @@ class NetworkManager: NSObject {
                                        seconderyIp: secondoryId,
                                        contentType: contentType,
                                        path: path,
-                                       params: params,
-                                    queryParams: queryParams)
+                                       params: params)
         print(requestPost)
         let task = self.requestDataTask(request: requestPost, requestType: requestType, resultHandler: resultHandler)
         task?.resume()
@@ -266,51 +270,67 @@ class NetworkManager: NSObject {
         return task
     }
 
-    func request(with method: RequestType, urlstring: String? = nil, seconderyIp: String? = nil, contentType: ContentType, path: String, params: Any?, queryParams: [String: Any]? = nil) -> URLRequest {
+    func request(with method: RequestType, urlstring: String? = nil, seconderyIp: String? = nil, contentType: ContentType, path: String, params: Any?) -> URLRequest {
         var url: URL!
-
-        // Resolve the base URL and path
-        url = URL(string: path, relativeTo: self.baseUrl)
-
-        // Append query parameters
-        if let queryParams = queryParams, !queryParams.isEmpty {
-            var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            components?.queryItems = queryParams.map { URLQueryItem(name: $0.key, value: "\($0.value)") }
-            url = components?.url
+//        if !(seconderyIp?.isEmpty ?? false) && (path == API.initiateCall.rawValue || path == API.initiateChat.rawValue) {
+//            url = URL(string: "http://\(seconderyIp ?? "")/astroswamiji/\(path)")
+//        } else
+        if let urlstring = urlstring, !urlstring.isEmpty {
+            url = URL(string: urlstring)
+        } else {
+            url = URL(string: path, relativeTo: self.baseUrl)
         }
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = (path.isEmpty) ? [:] : defaultHeaders
+        request.url = url
         request.cachePolicy = URLRequest.CachePolicy.reloadIgnoringLocalCacheData
 
         if method == .get || method == .head {
             request.httpShouldUsePipelining = true
         }
 
-        // Handle body parameters if method allows
-        guard let parameters = params, !(method == .get || method == .head || method == .delete) else {
+        guard let parameters = params else {
             return request
         }
 
-        // Content-Type handling
+        guard (method == .get || method == .head || method == .delete) == false else {
+            if let param = parameters as? [String: Any] {
+                let range = path.range(of: "?")
+                var appendingString = ""
+                let serializedParams = self.serilizeParams(param)
+                if range == nil {
+                    appendingString = "?\(serializedParams)"
+                } else {
+                    appendingString = "&\(serializedParams)"
+                }
+                let newUrl = URL(string: url.absoluteString.appending(appendingString))
+                request.url = newUrl
+            }
+            return request
+        }
+
         let charset = String(CFStringConvertEncodingToIANACharSetName(CFStringEncoding(String.Encoding.utf8.rawValue)))
         switch contentType {
-        case .applicationJson:
+        case ContentType.applicationJson:
+            // For Node JS Server
+            // request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            // For Php
             request.setValue("application/json; charset=\(charset)", forHTTPHeaderField: "Content-Type")
             request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
-        case .formData:
-            let POSTBoundary = "boundary-\(UUID().uuidString)"
+        case ContentType.formData:
+            let POSTBoundary = "astrologer-boundary"
             request.setValue("multipart/form-data; charset=\(charset); boundary=\(POSTBoundary)", forHTTPHeaderField: "Content-Type")
             request.httpBody = self.buildMultipartFormData(postBody: POSTBoundary, params: parameters as? [[String: AnyObject]])
-        case .formUrlencoded:
+        case ContentType.formUrlencoded:
             request.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
             guard let sParams = parameters as? [String: Any] else { return request }
-            request.httpBody = self.serilizeParams(sParams).data(using: .utf8)
-        case .none:
+            request.httpBody = self.serilizeParams(sParams).data(using: String.Encoding.utf8)
+        case ContentType.none:
             break
         case .php:
-            request.httpBody = (parameters as? String)?.data(using: .utf8)
+            request.httpBody = (params as? String)?.data(using: .utf8)
         }
 
         return request

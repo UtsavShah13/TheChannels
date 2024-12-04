@@ -14,14 +14,14 @@ extension HomeViewController {
         NetworkManager.shared.getCategoriesDataAPI(completion: { data in
             Utils.hideSpinner()
             self.categories = data ?? []
-            self.getChannels(categoryId: self.categories.first?.category_id ?? "")
+            self.getChannels(categoryId: self.categories.first?.category_id ?? "", page: 0)
             self.collectionView.reloadData()
         })
     }
     
-    func getChannels(categoryId: String) {
+    func getChannels(categoryId: String, page: Int) {
         Utils.showSpinner()
-        let param: [String: Any] = ["category_id": 3, "from": 0]
+        let param: [String: Any] = ["category_id": categoryId, "from": page]
         NetworkManager.shared.getChannelsApi(param: param, completion: { data in
             Utils.hideSpinner()
             self.channels = data ?? []
@@ -29,4 +29,25 @@ extension HomeViewController {
             print(data as Any)
         })
     }
+    
+    func getSearchChannels(searchText: String, page: Int) {
+        Utils.showSpinner()
+        let param: [String: Any] = ["search_text": searchText, "from": page]
+        NetworkManager.shared.getSearchedChannelsApi(param: param, completion: { data in
+            Utils.hideSpinner()
+            self.channels = data ?? []
+            self.tableView.reloadData()
+            print(data as Any)
+        })
+    }
+    
+    func followChannel(channelId: String) {
+        Utils.showSpinner()
+        let param: [String: Any] = ["channel_id": channelId]
+        NetworkManager.shared.postFollowChannelsApi(param: param, completion: { data in
+            Utils.hideSpinner()
+        })
+    }
+
+    
 }
