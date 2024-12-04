@@ -12,14 +12,18 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var channels = ["AajTak","Sun News","RJ Kajal","Zee News","Times Now","The Wire"]
-    var categories = ["General","Sports","Entertainment","Technology","Business","Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion", "Sports", "Entertainment", "Technology", "Business", "Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion"]
+    var channels: [Channel] = []
+//    ["AajTak","Sun News","RJ Kajal","Zee News","Times Now","The Wire"]
+    var categories: [Categories] = []
+    
+//    ["General","Sports","Entertainment","Technology","Business","Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion", "Sports", "Entertainment", "Technology", "Business", "Health", "Lifestyle", "Travel", "Food", "Auto", "Gaming", "Science", "Fashion", "Music", "Politics", "Religion"]
     var selectedCategory: Int?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        getCategories()
     }
 
     func setupUI() {
@@ -77,7 +81,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.channelsCell, for: indexPath) as? ChannelsTableViewCell else { return UITableViewCell() }
-        cell.nameLabel.text = channels[indexPath.row]
+        cell.nameLabel.text = channels[indexPath.row].title
         cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
         cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
         cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
@@ -99,7 +103,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.categoriesCell, for: indexPath) as? CategoriesCollectionViewCell else { return UICollectionViewCell() }
-        cell.categoryLabel.text = categories[indexPath.item]
+        cell.categoryLabel.text = categories[indexPath.item].title
         if indexPath.item == selectedCategory {
             cell.categoryLabel.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
             cell.mainView.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
@@ -127,13 +131,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let text = categories[indexPath.item]
+        let text = categories[indexPath.item].title
         
         // Calculate the text width
-        let textWidth = text.size(withAttributes: [.font: UIFont.systemFont(ofSize: 17)]).width
+        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 17)]).width
         
         // Add padding
-        return CGSize(width: textWidth + 32, height: 45)
+        return CGSize(width: (textWidth ?? 0) + 32, height: 45)
     }
 
 }

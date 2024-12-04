@@ -25,6 +25,12 @@
 		6F4130FC2CFB986200F3A49A /* ChannelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4130F92CFB986200F3A49A /* ChannelsTableViewCell.swift */; };
 		6F4131012CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4131002CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib */; };
 		6F4131022CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4130FF2CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift */; };
+		6F6796692CFF8C30008EFA9A /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796682CFF8C30008EFA9A /* CategoryModel.swift */; };
+		6F67966B2CFF8CFD008EFA9A /* NetworkManager+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F67966A2CFF8CFD008EFA9A /* NetworkManager+API.swift */; };
+		6F6796702CFF8DA5008EFA9A /* SVProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 6F67966F2CFF8DA5008EFA9A /* SVProgressHUD */; };
+		6F6796752CFF8F18008EFA9A /* HomeVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796742CFF8F18008EFA9A /* HomeVCPresenter.swift */; };
+		6F6796772CFF904D008EFA9A /* AlertViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796762CFF904D008EFA9A /* AlertViewControllerExtension.swift */; };
+		6F6796792CFF958C008EFA9A /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796782CFF958C008EFA9A /* ChannelModel.swift */; };
 		6FC15F422CFB90D40056F901 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC15F412CFB90C60056F901 /* OnboardingViewController.swift */; };
 		A7BE77802CF9C77D00D9B65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE777F2CF9C77D00D9B65B /* AppDelegate.swift */; };
 		A7BE77842CF9C77D00D9B65B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE77832CF9C77D00D9B65B /* HomeViewController.swift */; };
@@ -52,6 +58,11 @@
 		6F4130FA2CFB986200F3A49A /* ChannelsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsTableViewCell.xib; sourceTree = "<group>"; };
 		6F4130FF2CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F4131002CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoriesCollectionViewCell.xib; sourceTree = "<group>"; };
+		6F6796682CFF8C30008EFA9A /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		6F67966A2CFF8CFD008EFA9A /* NetworkManager+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkManager+API.swift"; sourceTree = "<group>"; };
+		6F6796742CFF8F18008EFA9A /* HomeVCPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVCPresenter.swift; sourceTree = "<group>"; };
+		6F6796762CFF904D008EFA9A /* AlertViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertViewControllerExtension.swift; sourceTree = "<group>"; };
+		6F6796782CFF958C008EFA9A /* ChannelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelModel.swift; sourceTree = "<group>"; };
 		6FC15F412CFB90C60056F901 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A7BE777C2CF9C77D00D9B65B /* TheChannels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheChannels.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BE777F2CF9C77D00D9B65B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6796702CFF8DA5008EFA9A /* SVProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,9 +102,9 @@
 		6F27AF8B2CFA3687007E6645 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6FC15F412CFB90C60056F901 /* OnboardingViewController.swift */,
-				A7BE77832CF9C77D00D9B65B /* HomeViewController.swift */,
-				6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */,
+				6F6796722CFF8EF0008EFA9A /* Onboarding */,
+				6F6796712CFF8EE7008EFA9A /* Home */,
+				6F6796732CFF8EFB008EFA9A /* Setting */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -118,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */,
+				6F67966A2CFF8CFD008EFA9A /* NetworkManager+API.swift */,
 			);
 			path = NetworkManager;
 			sourceTree = "<group>";
@@ -125,6 +138,8 @@
 		6F27AF912CFA395D007E6645 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6F6796682CFF8C30008EFA9A /* CategoryModel.swift */,
+				6F6796782CFF958C008EFA9A /* ChannelModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -138,6 +153,7 @@
 				6F27AF952CFA3977007E6645 /* FontExtension.swift */,
 				6F27AF962CFA3977007E6645 /* HtmlAttributtedText.swift */,
 				6F27AF972CFA3977007E6645 /* LabelExtention.swift */,
+				6F6796762CFF904D008EFA9A /* AlertViewControllerExtension.swift */,
 				6F27AF982CFA3977007E6645 /* StringExtension.swift */,
 				6F27AF992CFA3977007E6645 /* TableViewExtension.swift */,
 				6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */,
@@ -173,6 +189,31 @@
 				6F4130FA2CFB986200F3A49A /* ChannelsTableViewCell.xib */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6F6796712CFF8EE7008EFA9A /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A7BE77832CF9C77D00D9B65B /* HomeViewController.swift */,
+				6F6796742CFF8F18008EFA9A /* HomeVCPresenter.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6F6796722CFF8EF0008EFA9A /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				6FC15F412CFB90C60056F901 /* OnboardingViewController.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		6F6796732CFF8EFB008EFA9A /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */,
+			);
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		A7BE77732CF9C77C00D9B65B = {
@@ -253,6 +294,9 @@
 				Base,
 			);
 			mainGroup = A7BE77732CF9C77C00D9B65B;
+			packageReferences = (
+				6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
+			);
 			productRefGroup = A7BE777D2CF9C77D00D9B65B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -284,13 +328,17 @@
 			files = (
 				6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */,
 				A7BE77842CF9C77D00D9B65B /* HomeViewController.swift in Sources */,
+				6F6796772CFF904D008EFA9A /* AlertViewControllerExtension.swift in Sources */,
 				A7BE77802CF9C77D00D9B65B /* AppDelegate.swift in Sources */,
 				6F27AF9F2CFA3977007E6645 /* ColorExtension.swift in Sources */,
+				6F6796792CFF958C008EFA9A /* ChannelModel.swift in Sources */,
+				6F6796692CFF8C30008EFA9A /* CategoryModel.swift in Sources */,
 				6F27AFAE2CFA3DB9007E6645 /* SettingViewController.swift in Sources */,
 				6F27AFA02CFA3977007E6645 /* FontExtension.swift in Sources */,
 				6F27AFA12CFA3977007E6645 /* HtmlAttributtedText.swift in Sources */,
 				6FC15F422CFB90D40056F901 /* OnboardingViewController.swift in Sources */,
 				6F27AFA22CFA3977007E6645 /* LabelExtention.swift in Sources */,
+				6F6796752CFF8F18008EFA9A /* HomeVCPresenter.swift in Sources */,
 				6F27AFA32CFA3977007E6645 /* UIDevice+Extension.swift in Sources */,
 				6F27AFA42CFA3977007E6645 /* TableViewExtension.swift in Sources */,
 				6F4130FC2CFB986200F3A49A /* ChannelsTableViewCell.swift in Sources */,
@@ -298,6 +346,7 @@
 				6F4131022CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift in Sources */,
 				6F27AFA62CFA3977007E6645 /* UIViewControllerExtension.swift in Sources */,
 				6F27AFA72CFA3977007E6645 /* DateExtension.swift in Sources */,
+				6F67966B2CFF8CFD008EFA9A /* NetworkManager+API.swift in Sources */,
 				6F27AFA82CFA3977007E6645 /* ErrorExtension.swift in Sources */,
 				6F27AFA92CFA3977007E6645 /* TextFiledExtention.swift in Sources */,
 				6F27AFAA2CFA3977007E6645 /* UIViewExtesnsion.swift in Sources */,
@@ -523,6 +572,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SVProgressHUD/SVProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F67966F2CFF8DA5008EFA9A /* SVProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
+			productName = SVProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A7BE77742CF9C77C00D9B65B /* Project object */;
 }
