@@ -79,17 +79,4 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.imageView.image = UIImage(named: intoImages[indexPath.item])
         return cell
     }
-        
-    // MARK: - UICollectionViewDelegateFlowLayout
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let text = categories[indexPath.item].title
-//        
-//        // Calculate the text width
-//        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 17)]).width
-//        
-//        // Add padding
-//        return CGSize(width: (textWidth ?? 0) + 32, height: 45)
-//    }
-
 }
