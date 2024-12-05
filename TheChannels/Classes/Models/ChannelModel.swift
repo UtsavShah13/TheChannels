@@ -43,6 +43,7 @@ struct Channel : Codable {
     let is_verified : String?
     let join_link : String?
     let description : String?
+    let subscribersf: String?
 
     enum CodingKeys: String, CodingKey {
 
@@ -54,6 +55,7 @@ struct Channel : Codable {
         case is_verified = "is_verified"
         case join_link = "join_link"
         case description = "description"
+        case subscribersf = "subscribersf"
     }
 
     init(from decoder: Decoder) throws {
@@ -66,6 +68,7 @@ struct Channel : Codable {
         is_verified = try values.decodeIfPresent(String.self, forKey: .is_verified)
         join_link = try values.decodeIfPresent(String.self, forKey: .join_link)
         description = try values.decodeIfPresent(String.self, forKey: .description)
+        subscribersf = try values.decodeIfPresent(String.self, forKey: .subscribersf)
     }
 
 }

@@ -219,6 +219,59 @@
             </objects>
             <point key="canvasLocation" x="330.53435114503816" y="666.90140845070425"/>
         </scene>
+        <!--Channel Detail View Controller-->
+        <scene sceneID="4C5-oY-TnX">
+            <objects>
+                <viewController storyboardIdentifier="ChannelDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kVl-QL-e1N" customClass="ChannelDetailViewController" customModule="TheChannels" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SVa-7u-J2a">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qg5-U4-sau">
+                                <rect key="frame" x="0.0" y="71" width="393" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ss3-73-mIF">
+                                        <rect key="frame" x="12" y="12" width="25" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="25" id="PSg-Rj-Pd6"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="iccnback"/>
+                                        <connections>
+                                            <action selector="backAction:" destination="kVl-QL-e1N" eventType="touchUpInside" id="Dln-HU-sMm"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5D-80-ZTl">
+                                        <rect key="frame" x="125" y="9.9999999999999982" width="143" height="25.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="ss3-73-mIF" firstAttribute="top" secondItem="qg5-U4-sau" secondAttribute="top" constant="12" id="24t-Hc-ani"/>
+                                    <constraint firstItem="c5D-80-ZTl" firstAttribute="centerY" secondItem="qg5-U4-sau" secondAttribute="centerY" id="KCi-0U-oRa"/>
+                                    <constraint firstItem="c5D-80-ZTl" firstAttribute="centerX" secondItem="qg5-U4-sau" secondAttribute="centerX" id="Le5-FC-LhZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="ss3-73-mIF" secondAttribute="bottom" constant="12" id="Ry9-Oa-hTC"/>
+                                    <constraint firstAttribute="height" constant="45" id="Vu3-UB-iUe"/>
+                                    <constraint firstItem="ss3-73-mIF" firstAttribute="leading" secondItem="qg5-U4-sau" secondAttribute="leading" constant="12" id="hRb-lY-ujT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5Tr-50-ZBS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qg5-U4-sau" firstAttribute="top" secondItem="5Tr-50-ZBS" secondAttribute="top" constant="12" id="6Yi-e0-8Lx"/>
+                            <constraint firstItem="qg5-U4-sau" firstAttribute="leading" secondItem="SVa-7u-J2a" secondAttribute="leading" id="Zfq-1s-Gmx"/>
+                            <constraint firstItem="5Tr-50-ZBS" firstAttribute="trailing" secondItem="qg5-U4-sau" secondAttribute="trailing" id="ynj-ET-b3n"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ygl-Iv-s0W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1126" y="667"/>
+        </scene>
         <!--Setting View Controller-->
         <scene sceneID="osJ-Sq-lcY">
             <objects>

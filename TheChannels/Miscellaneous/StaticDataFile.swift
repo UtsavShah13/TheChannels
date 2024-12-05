@@ -13,11 +13,13 @@ struct Controller {
     static let homeVC = "HomeViewController"
     static let onboardingVC = "OnboardingViewController"
     static let settingVC = "SettingViewController"
+    static let channelDetailsVC = "ChannelDetailViewController"
 }
 
 struct Cell {
     static let channelsCell = "ChannelsTableViewCell"
     static let categoriesCell = "CategoriesCollectionViewCell"
+    static let onboardingCell = "OnboardingCollectionViewCell"
 }
 
 struct AppConfigs

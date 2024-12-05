@@ -21,11 +21,15 @@ extension HomeViewController {
     
     func getChannels(categoryId: String, page: Int) {
         Utils.showSpinner()
+        if page == 0 {
+            channels = []
+        }
         let param: [String: Any] = ["category_id": categoryId, "from": page]
         NetworkManager.shared.getChannelsApi(param: param, completion: { data in
             Utils.hideSpinner()
             self.channels = data ?? []
             self.tableView.reloadData()
+            self.collectionView.reloadData()
             print(data as Any)
         })
     }

@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     
     var channels: [Channel] = []
     var categories: [Categories] = []
-    var selectedCategory: Int?
+    var selectedCategory: Int? = 0
+    var currentPage: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ class HomeViewController: UIViewController {
         searchView.backgroundColor = UIColor.colorFromHex("E4E4E6", alpha: 1)
         setupTableView()
         setupCollectionView()
+        
+        searchTextField.delegate = self
     }
     
     func setupTableView() {
@@ -55,14 +58,28 @@ class HomeViewController: UIViewController {
         }
     }
     
-    func moveToChannelDetail() {
-        
+    func moveToChannelDetail(channel: Channel) {
+        let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
+        if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.channelDetailsVC) as? ChannelDetailViewController {
+            vc.channel = channel
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 //    MARK: Button Action
     
     @IBAction func settingAction(_ sender: UIButton) {
         moveToSetting()
+    }
+}
+
+//MARK: -
+
+extension HomeViewController: UITextFieldDelegate {
+  
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        return true
     }
 }
 
@@ -82,6 +99,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.varifiedImageView.isHidden = false
         }
+        cell.followersLabel.text = channels[indexPath.row].subscribersf
         cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
         cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
         cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
@@ -92,7 +110,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        moveToChannelDetail()
+        moveToChannelDetail(channel: channels[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
     }
 
 }
@@ -119,10 +141,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCategory = indexPath.item
-        collectionView.reloadData()
-        tableView.reloadData()
+        getChannels(categoryId: categories[selectedCategory ?? 0].category_id ?? "", page: 0)
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }

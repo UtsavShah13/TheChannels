@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		014CB6E42D0176BB006AFC8C /* ChannelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */; };
+		014CB6EB2D018211006AFC8C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */; };
+		014CB6EC2D018211006AFC8C /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */; };
 		6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */; };
 		6F27AF9F2CFA3977007E6645 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF922CFA3977007E6645 /* ColorExtension.swift */; };
 		6F27AFA02CFA3977007E6645 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF952CFA3977007E6645 /* FontExtension.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDetailViewController.swift; sourceTree = "<group>"; };
+		014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6F27AF922CFA3977007E6645 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		6F27AF932CFA3977007E6645 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -89,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		014CB6E22D017695006AFC8C /* ChannelDetail */ = {
+			isa = PBXGroup;
+			children = (
+				014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */,
+			);
+			path = ChannelDetail;
+			sourceTree = "<group>";
+		};
 		6F27AF8A2CFA367C007E6645 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +116,7 @@
 		6F27AF8B2CFA3687007E6645 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				014CB6E22D017695006AFC8C /* ChannelDetail */,
 				6F6796722CFF8EF0008EFA9A /* Onboarding */,
 				6F6796712CFF8EE7008EFA9A /* Home */,
 				6F6796732CFF8EFB008EFA9A /* Setting */,
@@ -178,6 +193,8 @@
 			children = (
 				6F4130FF2CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift */,
 				6F4131002CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib */,
+				014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */,
+				014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -313,6 +330,7 @@
 			files = (
 				A7BE778C2CF9C77F00D9B65B /* LaunchScreen.storyboard in Resources */,
 				6F4131012CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib in Resources */,
+				014CB6EC2D018211006AFC8C /* OnboardingCollectionViewCell.xib in Resources */,
 				6F4130FB2CFB986200F3A49A /* ChannelsTableViewCell.xib in Resources */,
 				A7BE77892CF9C77F00D9B65B /* Assets.xcassets in Resources */,
 				A7BE77872CF9C77D00D9B65B /* Main.storyboard in Resources */,
@@ -345,11 +363,13 @@
 				6F27AFA52CFA3977007E6645 /* StringExtension.swift in Sources */,
 				6F4131022CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift in Sources */,
 				6F27AFA62CFA3977007E6645 /* UIViewControllerExtension.swift in Sources */,
+				014CB6EB2D018211006AFC8C /* OnboardingCollectionViewCell.swift in Sources */,
 				6F27AFA72CFA3977007E6645 /* DateExtension.swift in Sources */,
 				6F67966B2CFF8CFD008EFA9A /* NetworkManager+API.swift in Sources */,
 				6F27AFA82CFA3977007E6645 /* ErrorExtension.swift in Sources */,
 				6F27AFA92CFA3977007E6645 /* TextFiledExtention.swift in Sources */,
 				6F27AFAA2CFA3977007E6645 /* UIViewExtesnsion.swift in Sources */,
+				014CB6E42D0176BB006AFC8C /* ChannelDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
