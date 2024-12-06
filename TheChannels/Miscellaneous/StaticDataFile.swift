@@ -14,6 +14,7 @@ struct Controller {
     static let onboardingVC = "OnboardingViewController"
     static let settingVC = "SettingViewController"
     static let channelDetailsVC = "ChannelDetailViewController"
+    static let addChannelVC = "AddChannelViewController"
 }
 
 struct Cell {

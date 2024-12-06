@@ -51,6 +51,13 @@ class HomeViewController: UIViewController {
         collectionView.collectionViewLayout = flowLayout
     }
     
+    func moveToAddChannel() {
+        let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
+        if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.addChannelVC) as? AddChannelViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
     func moveToSetting() {
         let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
         if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.settingVC) as? SettingViewController {
@@ -71,15 +78,36 @@ class HomeViewController: UIViewController {
     @IBAction func settingAction(_ sender: UIButton) {
         moveToSetting()
     }
+    
+    @IBAction func addButtonAction(_ sender: UIButton) {
+        moveToAddChannel()
+    }
+    
 }
 
-//MARK: -
+//MARK: - UITextFieldDelegate
 
 extension HomeViewController: UITextFieldDelegate {
   
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // Get the new text
+        let currentText = textField.text ?? ""
+        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
+        // Call your search API with updatedText
+        performSearch(with: updatedText)
+
         return true
+    }
+    
+    func performSearch(with query: String) {
+        // Ensure query is not empty to prevent unnecessary API calls
+        guard !query.isEmpty else { return }
+        
+        // Simulate API call (Replace with your API integration)
+        print("Searching for: \(query)")
+        
+        getSearchChannels(searchText: query, page: 1)
     }
 }
 
@@ -114,7 +142,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+        currentPage += 1
+        getChannels(categoryId:  categories[selectedCategory ?? 0].category_id ?? "", page: currentPage)
     }
 
 }
@@ -140,8 +169,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedCategory = indexPath.item
-        getChannels(categoryId: categories[selectedCategory ?? 0].category_id ?? "", page: 0)
+        
+//        selectedCategory = indexPath.item
+//        getChannels(categoryId: categories[selectedCategory ?? 0].category_id ?? "", page: 0)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -8,7 +8,7 @@ import UIKit
 import SystemConfiguration
 
 enum API: String {
-    case baseUrl = "https://appcodism.com/davidapps/thechannels/index.php?function=getgroups"
+    case baseUrl = "https://appcodism.com/davidapps/thechannels/"
     case channelCategory = "index.php?function=getcategories"
     case getChannelList = "index.php?function=getgroups"
     case followChannel = "index.php?function=follow"
