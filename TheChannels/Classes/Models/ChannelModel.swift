@@ -13,6 +13,7 @@ struct ChannelData : Codable {
     let message : String?
     let isSearchPaid : String?
     let rFORR : String?
+    let hasMorePages: String?
 
     enum CodingKeys: String, CodingKey {
 
@@ -21,6 +22,7 @@ struct ChannelData : Codable {
         case message = "MESSAGE"
         case isSearchPaid = "IS_SEARCH_PAID"
         case rFORR = "RFORR"
+        case hasMorePages = "has_more_pages"
     }
 
     init(from decoder: Decoder) throws {
@@ -30,6 +32,7 @@ struct ChannelData : Codable {
         rFORR = try values.decodeIfPresent(String.self, forKey: .rFORR)
         message = try values.decodeIfPresent(String.self, forKey: .message)
         channels = try values.decodeIfPresent([Channel].self, forKey: .channels)
+        hasMorePages = try values.decodeIfPresent(String.self, forKey: .hasMorePages)
     }
 
 }

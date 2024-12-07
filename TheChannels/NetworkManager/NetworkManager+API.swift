@@ -30,7 +30,7 @@ extension NetworkManager {
         }
     }
     
-    func getChannelsApi(param: [String: Any], completion: @escaping((_ result: [Channel]?) -> Void)) {
+    func getChannelsApi(param: [String: Any], completion: @escaping((_ result: ChannelData?) -> Void)) {
         
         NetworkManager.shared.requestPost(path: API.getChannelList.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
             guard error == nil, let data = result else {
@@ -40,7 +40,7 @@ extension NetworkManager {
                 return
             }
             if let response: ChannelData = self.decodeObject(fromData: data), response.success == "1" {
-                completion(response.channels)
+                completion(response)
             } else {
                 Utils.hideSpinner()
                 Utils.alert(message: error?.localizedDescription ?? "")
@@ -48,7 +48,7 @@ extension NetworkManager {
         }
     }
     
-    func getSearchedChannelsApi(param: [String: Any], completion: @escaping((_ result: [Channel]?) -> Void)) {
+    func getSearchedChannelsApi(param: [String: Any], completion: @escaping((_ result: ChannelData?) -> Void)) {
         
         NetworkManager.shared.requestPost(path: API.searchChannel.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
             guard error == nil, let data = result else {
@@ -58,7 +58,7 @@ extension NetworkManager {
                 return
             }
             if let response: ChannelData = self.decodeObject(fromData: data), response.success == "1" {
-                completion(response.channels)
+                completion(response)
             } else {
                 Utils.hideSpinner()
                 Utils.alert(message: error?.localizedDescription ?? "")

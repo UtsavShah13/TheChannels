@@ -15,6 +15,7 @@ struct Controller {
     static let settingVC = "SettingViewController"
     static let channelDetailsVC = "ChannelDetailViewController"
     static let addChannelVC = "AddChannelViewController"
+    static let notificationPermissionVC = "NotificationPermissionViewController"
 }
 
 struct Cell {
@@ -27,10 +28,10 @@ struct AppConfigs
 {
     static let appName : String = "The Channels"
     
-    static let kBaseURL  = ""
-    static let kGetCategoriesURL  = kBaseURL + "getcategories.php"
-    static let kGetChannelsURL  = kBaseURL + "getchannels.php"
-    static let kChannelActionURL  = kBaseURL + "action.php"
+//    static let kBaseURL  = ""
+//    static let kGetCategoriesURL  = kBaseURL + "getcategories.php"
+//    static let kGetChannelsURL  = kBaseURL + "getchannels.php"
+//    static let kChannelActionURL  = kBaseURL + "action.php"
     
     static let kAppStoreAppId = "1473551769"
     static let kAppSharingURL : String = "https://apps.apple.com/app/slideshow-maker-photo-video/id1473551769"

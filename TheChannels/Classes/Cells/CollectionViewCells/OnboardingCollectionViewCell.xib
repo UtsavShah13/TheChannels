@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,18 +17,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgintro" translatesAutoresizingMaskIntoConstraints="NO" id="UDp-eO-XtY">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r6g-9V-yh0">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="UDp-eO-XtY" secondAttribute="trailing" id="0oQ-fb-eT7"/>
+                <constraint firstItem="UDp-eO-XtY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="SMX-Jg-Yg5"/>
                 <constraint firstAttribute="bottom" secondItem="r6g-9V-yh0" secondAttribute="bottom" id="Y8E-GU-jrE"/>
+                <constraint firstItem="UDp-eO-XtY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Zfs-W6-GVL"/>
                 <constraint firstAttribute="trailing" secondItem="r6g-9V-yh0" secondAttribute="trailing" id="o8P-zt-5lT"/>
                 <constraint firstItem="r6g-9V-yh0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pmg-vJ-Nlm"/>
                 <constraint firstItem="r6g-9V-yh0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qOw-Zm-HFP"/>
+                <constraint firstAttribute="bottom" secondItem="UDp-eO-XtY" secondAttribute="bottom" id="stu-fd-i31"/>
             </constraints>
             <connections>
                 <outlet property="imageView" destination="r6g-9V-yh0" id="isE-is-oIE"/>
@@ -38,8 +44,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="bgintro" width="2484" height="2979"/>
     </resources>
 </document>

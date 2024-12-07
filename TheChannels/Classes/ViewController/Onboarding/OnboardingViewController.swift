@@ -47,9 +47,9 @@ class OnboardingViewController: UIViewController {
         
     }
     
-    func moveToHomeVC() {
+    func moveToNotificationVC() {
         let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
-        if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.homeVC) as? HomeViewController {
+        if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.notificationPermissionVC) as? NotificationPermissionViewController {
             let userDefaults = UserDefaults.standard
             userDefaults.set(true, forKey: "OnboardigComplete")
             self.navigationController?.pushViewController(vc, animated: true)
@@ -62,7 +62,7 @@ class OnboardingViewController: UIViewController {
             currentIndex += 1
             onboardingPageControl.currentPage = currentIndex
         } else {
-            moveToHomeVC()
+            moveToNotificationVC()
         }
     }
 }

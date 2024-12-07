@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     var categories: [Categories] = []
     var selectedCategory: Int? = 0
     var currentPage: Int = 0
+    var isContainMoreData: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,8 +143,13 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        currentPage += 1
-        getChannels(categoryId:  categories[selectedCategory ?? 0].category_id ?? "", page: currentPage)
+        print(channels.count)
+        print(indexPath.row)
+        print(channels.count == indexPath.row + 2)
+        if channels.count == indexPath.row + 2 && isContainMoreData {
+            currentPage += 1
+            getChannels(categoryId:  categories[selectedCategory ?? 0].category_id ?? "", page: currentPage)
+        }
     }
 
 }
@@ -169,9 +175,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        selectedCategory = indexPath.item
-//        getChannels(categoryId: categories[selectedCategory ?? 0].category_id ?? "", page: 0)
+        selectedCategory = indexPath.item
+        getChannels(categoryId: categories[selectedCategory ?? 0].category_id ?? "", page: 0)
     }
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

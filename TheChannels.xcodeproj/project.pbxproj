@@ -7,21 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0110469E2D0422AC009B0937 /* NotificationPermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0110469D2D0422AC009B0937 /* NotificationPermissionViewController.swift */; };
+		011046A22D042BF7009B0937 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011046A12D042BF7009B0937 /* FontExtension.swift */; };
 		014CB6E42D0176BB006AFC8C /* ChannelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */; };
 		014CB6EB2D018211006AFC8C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */; };
 		014CB6EC2D018211006AFC8C /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */; };
 		01F40C1E2D030CAD00CFDDC1 /* AddChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F40C1D2D030CAD00CFDDC1 /* AddChannelViewController.swift */; };
 		6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */; };
 		6F27AF9F2CFA3977007E6645 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF922CFA3977007E6645 /* ColorExtension.swift */; };
-		6F27AFA02CFA3977007E6645 /* FontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF952CFA3977007E6645 /* FontExtension.swift */; };
-		6F27AFA12CFA3977007E6645 /* HtmlAttributtedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF962CFA3977007E6645 /* HtmlAttributtedText.swift */; };
-		6F27AFA22CFA3977007E6645 /* LabelExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF972CFA3977007E6645 /* LabelExtention.swift */; };
-		6F27AFA32CFA3977007E6645 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9B2CFA3977007E6645 /* UIDevice+Extension.swift */; };
 		6F27AFA42CFA3977007E6645 /* TableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF992CFA3977007E6645 /* TableViewExtension.swift */; };
 		6F27AFA52CFA3977007E6645 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF982CFA3977007E6645 /* StringExtension.swift */; };
 		6F27AFA62CFA3977007E6645 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9C2CFA3977007E6645 /* UIViewControllerExtension.swift */; };
-		6F27AFA72CFA3977007E6645 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF932CFA3977007E6645 /* DateExtension.swift */; };
-		6F27AFA82CFA3977007E6645 /* ErrorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF942CFA3977007E6645 /* ErrorExtension.swift */; };
 		6F27AFA92CFA3977007E6645 /* TextFiledExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */; };
 		6F27AFAA2CFA3977007E6645 /* UIViewExtesnsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9D2CFA3977007E6645 /* UIViewExtesnsion.swift */; };
 		6F27AFAE2CFA3DB9007E6645 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */; };
@@ -44,21 +40,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0110469D2D0422AC009B0937 /* NotificationPermissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionViewController.swift; sourceTree = "<group>"; };
+		011046A12D042BF7009B0937 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
 		014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDetailViewController.swift; sourceTree = "<group>"; };
 		014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
 		01F40C1D2D030CAD00CFDDC1 /* AddChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelViewController.swift; sourceTree = "<group>"; };
 		6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6F27AF922CFA3977007E6645 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		6F27AF932CFA3977007E6645 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		6F27AF942CFA3977007E6645 /* ErrorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorExtension.swift; sourceTree = "<group>"; };
-		6F27AF952CFA3977007E6645 /* FontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtension.swift; sourceTree = "<group>"; };
-		6F27AF962CFA3977007E6645 /* HtmlAttributtedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlAttributtedText.swift; sourceTree = "<group>"; };
-		6F27AF972CFA3977007E6645 /* LabelExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelExtention.swift; sourceTree = "<group>"; };
 		6F27AF982CFA3977007E6645 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		6F27AF992CFA3977007E6645 /* TableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewExtension.swift; sourceTree = "<group>"; };
 		6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledExtention.swift; sourceTree = "<group>"; };
-		6F27AF9B2CFA3977007E6645 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		6F27AF9C2CFA3977007E6645 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		6F27AF9D2CFA3977007E6645 /* UIViewExtesnsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtesnsion.swift; sourceTree = "<group>"; };
 		6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0110469C2D042280009B0937 /* NotificationPermission */ = {
+			isa = PBXGroup;
+			children = (
+				0110469D2D0422AC009B0937 /* NotificationPermissionViewController.swift */,
+			);
+			path = NotificationPermission;
+			sourceTree = "<group>";
+		};
 		014CB6E22D017695006AFC8C /* ChannelDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +126,7 @@
 		6F27AF8B2CFA3687007E6645 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0110469C2D042280009B0937 /* NotificationPermission */,
 				01F40C1C2D030C9500CFDDC1 /* AddChannel */,
 				014CB6E22D017695006AFC8C /* ChannelDetail */,
 				6F6796722CFF8EF0008EFA9A /* Onboarding */,
@@ -174,16 +175,11 @@
 			isa = PBXGroup;
 			children = (
 				6F27AF922CFA3977007E6645 /* ColorExtension.swift */,
-				6F27AF932CFA3977007E6645 /* DateExtension.swift */,
-				6F27AF942CFA3977007E6645 /* ErrorExtension.swift */,
-				6F27AF952CFA3977007E6645 /* FontExtension.swift */,
-				6F27AF962CFA3977007E6645 /* HtmlAttributtedText.swift */,
-				6F27AF972CFA3977007E6645 /* LabelExtention.swift */,
 				6F6796762CFF904D008EFA9A /* AlertViewControllerExtension.swift */,
+				011046A12D042BF7009B0937 /* FontExtension.swift */,
 				6F27AF982CFA3977007E6645 /* StringExtension.swift */,
 				6F27AF992CFA3977007E6645 /* TableViewExtension.swift */,
 				6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */,
-				6F27AF9B2CFA3977007E6645 /* UIDevice+Extension.swift */,
 				6F27AF9C2CFA3977007E6645 /* UIViewControllerExtension.swift */,
 				6F27AF9D2CFA3977007E6645 /* UIViewExtesnsion.swift */,
 			);
@@ -355,6 +351,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				011046A22D042BF7009B0937 /* FontExtension.swift in Sources */,
 				6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */,
 				A7BE77842CF9C77D00D9B65B /* HomeViewController.swift in Sources */,
 				6F6796772CFF904D008EFA9A /* AlertViewControllerExtension.swift in Sources */,
@@ -363,21 +360,16 @@
 				6F6796792CFF958C008EFA9A /* ChannelModel.swift in Sources */,
 				6F6796692CFF8C30008EFA9A /* CategoryModel.swift in Sources */,
 				6F27AFAE2CFA3DB9007E6645 /* SettingViewController.swift in Sources */,
-				6F27AFA02CFA3977007E6645 /* FontExtension.swift in Sources */,
-				6F27AFA12CFA3977007E6645 /* HtmlAttributtedText.swift in Sources */,
 				6FC15F422CFB90D40056F901 /* OnboardingViewController.swift in Sources */,
-				6F27AFA22CFA3977007E6645 /* LabelExtention.swift in Sources */,
 				6F6796752CFF8F18008EFA9A /* HomeVCPresenter.swift in Sources */,
-				6F27AFA32CFA3977007E6645 /* UIDevice+Extension.swift in Sources */,
+				0110469E2D0422AC009B0937 /* NotificationPermissionViewController.swift in Sources */,
 				6F27AFA42CFA3977007E6645 /* TableViewExtension.swift in Sources */,
 				6F4130FC2CFB986200F3A49A /* ChannelsTableViewCell.swift in Sources */,
 				6F27AFA52CFA3977007E6645 /* StringExtension.swift in Sources */,
 				6F4131022CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift in Sources */,
 				6F27AFA62CFA3977007E6645 /* UIViewControllerExtension.swift in Sources */,
 				014CB6EB2D018211006AFC8C /* OnboardingCollectionViewCell.swift in Sources */,
-				6F27AFA72CFA3977007E6645 /* DateExtension.swift in Sources */,
 				6F67966B2CFF8CFD008EFA9A /* NetworkManager+API.swift in Sources */,
-				6F27AFA82CFA3977007E6645 /* ErrorExtension.swift in Sources */,
 				6F27AFA92CFA3977007E6645 /* TextFiledExtention.swift in Sources */,
 				01F40C1E2D030CAD00CFDDC1 /* AddChannelViewController.swift in Sources */,
 				6F27AFAA2CFA3977007E6645 /* UIViewExtesnsion.swift in Sources */,
