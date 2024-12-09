@@ -47,9 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         }
 
-        
-        
-        
     }
     // MARK: - AppDelegate Instance
     class var shared: AppDelegate? {
