@@ -17,6 +17,12 @@ class AddChannelViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    var categories: [Categories] = []
+    var isImagePickerOpen : Bool = false
+    var imageLogo = UIImageView()
+    var imageData = Data()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -30,6 +36,35 @@ class AddChannelViewController: UIViewController {
             descriptionTextView.borderColor = .systemGray
         }
         descriptionTextView.borderWidth = 1
+        pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
+    }
+    
+    private func openGallaryAlert(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: "Choose Option", message: "", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Update image", style: .default, handler: { [unowned self] _ in
+         
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+                self.isImagePickerOpen = true
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                //  imagePicker.allowsEditing = true
+                imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            else {
+                let alert  = UIAlertController(title: "Warning", message: "You don't have permission to access gallery.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: { _ in
+            self.imageLogo.image = nil
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender
+        }
+        present(actionSheet, animated: true, completion: nil)
     }
     
 //    MARK: - Button Action
@@ -39,14 +74,32 @@ class AddChannelViewController: UIViewController {
     }
     
     @IBAction func appPictureAction(_ sender: UIButton) {
-        
+        openGallaryAlert(sender)
     }
     
     @IBAction func addChannelAction(_ sender: UIButton) {
+        addChannel()
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func uploadCoverImageViewAction(_ sender: UIButton) {
+        openGallaryAlert(sender)
+    }
+}
+
+extension AddChannelViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        guard let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            return
+        }
+//        var finalImage = Utils.fixOrientation(img: pickedImage)
+        
+//        pickedImage = pickedImage.resized(toWidth: 300)!
+        isImagePickerOpen = false
+        imageLogo.image = pickedImage
+        pictureImageView.image = pickedImage
+        imageData = pickedImage.pngData() ?? Data()
+        self.dismiss(animated: true, completion: nil)
     }
 }

@@ -26,7 +26,6 @@ enum ContentType: String {
     case applicationJson = "application/json"
     case php = "php"
 }
-
 enum RequestType: String {
     case get = "GET"
     case post = "POST"

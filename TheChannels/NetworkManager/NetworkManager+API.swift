@@ -83,6 +83,24 @@ extension NetworkManager {
             }
         }
     }
+    
+    func postAddChannelsApi(param: [String: Any], completion: @escaping((_ result: String?) -> Void)) {
+        
+        NetworkManager.shared.requestPost(path: API.addChannel.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
+            guard error == nil, let data = result else {
+                Utils.alert(message: error?.localizedDescription ?? "Failed to fetch data")
+                Utils.hideSpinner()
+                completion(nil)
+                return
+            }
+            if let response: ChannelData = self.decodeObject(fromData: data), response.success == "1" {
+                completion(response.message)
+            } else {
+                Utils.hideSpinner()
+                Utils.alert(message: error?.localizedDescription ?? "")
+            }
+        }
+    }
 
 func handleError(_ message: String) {
     Utils.hideSpinner()

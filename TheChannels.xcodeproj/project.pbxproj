@@ -12,6 +12,7 @@
 		014CB6E42D0176BB006AFC8C /* ChannelDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */; };
 		014CB6EB2D018211006AFC8C /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */; };
 		014CB6EC2D018211006AFC8C /* OnboardingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */; };
+		017206592D0879120039F719 /* AddChannelPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017206582D0879120039F719 /* AddChannelPresenter.swift */; };
 		01F40C1E2D030CAD00CFDDC1 /* AddChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F40C1D2D030CAD00CFDDC1 /* AddChannelViewController.swift */; };
 		6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */; };
 		6F27AF9F2CFA3977007E6645 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF922CFA3977007E6645 /* ColorExtension.swift */; };
@@ -48,6 +49,7 @@
 		014CB6E32D0176BB006AFC8C /* ChannelDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelDetailViewController.swift; sourceTree = "<group>"; };
 		014CB6E92D018211006AFC8C /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		014CB6EA2D018211006AFC8C /* OnboardingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnboardingCollectionViewCell.xib; sourceTree = "<group>"; };
+		017206582D0879120039F719 /* AddChannelPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelPresenter.swift; sourceTree = "<group>"; };
 		01F40C1D2D030CAD00CFDDC1 /* AddChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChannelViewController.swift; sourceTree = "<group>"; };
 		6F27AF8F2CFA379E007E6645 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		6F27AF922CFA3977007E6645 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				01F40C1D2D030CAD00CFDDC1 /* AddChannelViewController.swift */,
+				017206582D0879120039F719 /* AddChannelPresenter.swift */,
 			);
 			path = AddChannel;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			files = (
 				011046A22D042BF7009B0937 /* FontExtension.swift in Sources */,
 				6F27AF902CFA379E007E6645 /* NetworkManager.swift in Sources */,
+				017206592D0879120039F719 /* AddChannelPresenter.swift in Sources */,
 				A7BE77842CF9C77D00D9B65B /* HomeViewController.swift in Sources */,
 				6F6796772CFF904D008EFA9A /* AlertViewControllerExtension.swift in Sources */,
 				A7BE77802CF9C77D00D9B65B /* AppDelegate.swift in Sources */,

@@ -56,6 +56,7 @@ class HomeViewController: UIViewController {
     func moveToAddChannel() {
         let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
         if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.addChannelVC) as? AddChannelViewController {
+            vc.categories = categories
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
