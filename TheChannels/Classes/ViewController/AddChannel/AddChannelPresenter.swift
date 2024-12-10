@@ -15,15 +15,18 @@ extension AddChannelViewController {
     
     func addChannel() {
         Utils.showSpinner()
-        var param: [String: Any] = [:]
-        param["title"] = titleTextField.text
-        param["channel_link"] = linkTextField.text
-//        param["category_id"] = categoryId
-//        param["datetime"] = dateTime
-//        param["country_code"] = countryCode
-//        param["phone_number"] = phoneNumber
-        param["description"] = descriptionTextView.text
-        NetworkManager.shared.postAddChannelsApi(param: [:]) { result in
+        var param: [String: Any] = ["title":titleTextField.text, "channel_link":linkTextField.text, "category_id":"12", "datetime":Date(), "country_code":"+91", "phone_number":"9662612345", "description":"descriptionTextView.text"]
+//        param[""] =
+//        param[""] =
+//        param[""] = "12"// selectedCategory?.category_id
+//        param[""] = Date()
+//        param[""] = "+91"
+//        param[""] = "9662612345"
+//        param["description"] =
+//        param["prole_pic"] = ""
+//        param["cover_pic"] =
+        
+        NetworkManager.shared.postAddChannelsApi(param: param) { result in
             print(result)
         }
     }

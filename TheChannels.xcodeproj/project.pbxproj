@@ -32,6 +32,7 @@
 		6F6796752CFF8F18008EFA9A /* HomeVCPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796742CFF8F18008EFA9A /* HomeVCPresenter.swift */; };
 		6F6796772CFF904D008EFA9A /* AlertViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796762CFF904D008EFA9A /* AlertViewControllerExtension.swift */; };
 		6F6796792CFF958C008EFA9A /* ChannelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6796782CFF958C008EFA9A /* ChannelModel.swift */; };
+		6F7E6CC32D08B5A300EB5981 /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7E6CC22D08B5A300EB5981 /* iOSDropDown */; };
 		6F8AACC12D0786DC00794643 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC02D0786DC00794643 /* SDWebImage */; };
 		6F8AACC32D0786DC00794643 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC22D0786DC00794643 /* SDWebImageMapKit */; };
 		6F8AACC62D07875000794643 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC52D07875000794643 /* IQKeyboardManagerSwift */; };
@@ -88,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F8AACC12D0786DC00794643 /* SDWebImage in Frameworks */,
+				6F7E6CC32D08B5A300EB5981 /* iOSDropDown in Frameworks */,
 				6F8AACC62D07875000794643 /* IQKeyboardManagerSwift in Frameworks */,
 				6F8AACC32D0786DC00794643 /* SDWebImageMapKit in Frameworks */,
 				6F6796702CFF8DA5008EFA9A /* SVProgressHUD in Frameworks */,
@@ -331,6 +333,7 @@
 				6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
 				6F8AACBF2D0786DC00794643 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				6F8AACC42D07875000794643 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				6F7E6CC12D08B5A300EB5981 /* XCRemoteSwiftPackageReference "iOSDropDown" */,
 			);
 			productRefGroup = A7BE777D2CF9C77D00D9B65B /* Products */;
 			projectDirPath = "";
@@ -618,6 +621,14 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		6F7E6CC12D08B5A300EB5981 /* XCRemoteSwiftPackageReference "iOSDropDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jriosdev/iOSDropDown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 		6F8AACBF2D0786DC00794643 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -641,6 +652,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */;
 			productName = SVProgressHUD;
+		};
+		6F7E6CC22D08B5A300EB5981 /* iOSDropDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7E6CC12D08B5A300EB5981 /* XCRemoteSwiftPackageReference "iOSDropDown" */;
+			productName = iOSDropDown;
 		};
 		6F8AACC02D0786DC00794643 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;

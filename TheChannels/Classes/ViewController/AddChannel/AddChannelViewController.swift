@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import iOSDropDown
 
 class AddChannelViewController: UIViewController {
 
+    @IBOutlet weak var categoryDropDown: DropDown!
+    @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var addChannelBtn: UIButton!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var chooseCoverImageView: UILabel!
@@ -22,7 +25,8 @@ class AddChannelViewController: UIViewController {
     var isImagePickerOpen : Bool = false
     var imageLogo = UIImageView()
     var imageData = Data()
-
+    var selectedCategory: Categories?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,6 +41,20 @@ class AddChannelViewController: UIViewController {
         }
         descriptionTextView.borderWidth = 1
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
+        let categoryTitles = categories.compactMap { $0.title }
+
+//        categoryDropDown.optionArray = ["22","21"]
+//        categoryDropDown.arrowSize = CGFloat(10)
+        
+        
+//        categoryDropDown.didSelect { selectedText, index, id in
+//            if let selectedCategory = self.categories.first(where: { $0.title == selectedText }) {
+//                print("Selected Category ID: \(selectedCategory.category_id ?? "N/A")")
+//                print("Selected Category Title: \(selectedCategory.title ?? "N/A")")
+//                self.selectedCategory = selectedCategory
+//            }
+//        }
+
     }
     
     private func openGallaryAlert(_ sender: UIButton) {

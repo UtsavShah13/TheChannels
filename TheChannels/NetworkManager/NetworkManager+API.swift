@@ -86,7 +86,7 @@ extension NetworkManager {
     
     func postAddChannelsApi(param: [String: Any], completion: @escaping((_ result: String?) -> Void)) {
         
-        NetworkManager.shared.requestPost(path: API.addChannel.rawValue, params: param, contentType: .formUrlencoded) { (result, error, _) in
+        NetworkManager.shared.requestUploadImage(path: API.addChannel.rawValue, params: param, contentType: .formData, resultHandler: {(result, error, _)in
             guard error == nil, let data = result else {
                 Utils.alert(message: error?.localizedDescription ?? "Failed to fetch data")
                 Utils.hideSpinner()
@@ -99,7 +99,8 @@ extension NetworkManager {
                 Utils.hideSpinner()
                 Utils.alert(message: error?.localizedDescription ?? "")
             }
-        }
+        })
+//        })
     }
 
 func handleError(_ message: String) {

@@ -458,7 +458,7 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Jc-vc-bSe">
+                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Jc-vc-bSe" customClass="DropDown" customModule="TheChannels" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="43" width="398" height="45"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="45" id="i1P-cu-1lx"/>
@@ -657,8 +657,10 @@
                     </view>
                     <connections>
                         <outlet property="addChannelBtn" destination="4c3-I6-gdZ" id="Mjf-EB-Awg"/>
+                        <outlet property="categoryDropDown" destination="7Jc-vc-bSe" id="yz7-G4-Io6"/>
                         <outlet property="chooseCoverImageView" destination="5Bl-KE-1Ei" id="sQd-Da-Kih"/>
                         <outlet property="coverImageView" destination="cVW-af-nl6" id="8xR-5V-lUG"/>
+                        <outlet property="dateTextField" destination="e9x-SK-f2g" id="7XT-gL-pDG"/>
                         <outlet property="descriptionTextView" destination="9WB-6t-55i" id="arn-B4-m8n"/>
                         <outlet property="linkTextField" destination="kFk-qG-dfv" id="Jwh-g9-dNk"/>
                         <outlet property="pictureImageView" destination="81m-EF-pzP" id="SAl-jz-aBh"/>
@@ -910,13 +912,13 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

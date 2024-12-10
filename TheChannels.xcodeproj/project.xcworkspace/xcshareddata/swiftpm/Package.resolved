@@ -1,6 +1,15 @@
 {
-  "originHash" : "eef82402400e7e53014f8535b83a6289f43866b52b0ac3289d42b5226bb2c005",
+  "originHash" : "d26a2322f81598b16f0419783d9c658b054cdc73121c83e844fb6051065e923a",
   "pins" : [
+    {
+      "identity" : "iosdropdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jriosdev/iOSDropDown.git",
+      "state" : {
+        "revision" : "945c4f1945ed37a31055e812a5ee11a3d06e88ab",
+        "version" : "0.4.0"
+      }
+    },
     {
       "identity" : "iqkeyboardcore",
       "kind" : "remoteSourceControl",
