@@ -24,6 +24,7 @@ class ChannelsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         followButton.layer.cornerRadius = 10
+        categoryImageView.layer.cornerRadius = categoryImageView.frame.height / 2
     }
     
     @IBAction func folloAction(_ sender: UIButton) {

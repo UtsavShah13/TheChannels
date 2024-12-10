@@ -21,8 +21,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-1C-OVD">
                         <rect key="frame" x="0.0" y="0.0" width="339" height="66"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="externaldrive.badge.icloud" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="yL0-64-Erj">
-                                <rect key="frame" x="4.6666666666666679" y="10" width="53.333333333333329" height="48"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yL0-64-Erj">
+                                <rect key="frame" x="8" y="8" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="cNk-ls-vS0"/>
                                     <constraint firstAttribute="width" constant="50" id="wil-Ps-F2y"/>
@@ -100,7 +100,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="externaldrive.badge.icloud" catalog="system" width="128" height="86"/>
         <image name="iccnproslide_3" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

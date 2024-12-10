@@ -4,6 +4,7 @@
 //  Created by Utsav on 29/11/24.
 //
 import UIKit
+import SDWebImage
 
 class HomeViewController: UIViewController {
 
@@ -132,6 +133,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
         cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
         cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
+        let imageUrl = URL(string: channels[indexPath.row].pic_thumb ?? "")
+        if imageUrl != nil {
+            cell.categoryImageView?.sd_setImage(with: imageUrl)
+        }
         cell.handleFollowButton = { [self] in
             followChannel(channelId: channels[indexPath.row].channel_id ?? "")
         }

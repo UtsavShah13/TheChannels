@@ -24,6 +24,12 @@ class AddChannelViewController: UIViewController {
     
     func setupUI() {
         addChannelBtn.layer.cornerRadius = 10
+        if #available(iOS 13.0, *) {
+            descriptionTextView.borderColor = .systemGray5
+        } else {
+            descriptionTextView.borderColor = .systemGray
+        }
+        descriptionTextView.borderWidth = 1
     }
     
 //    MARK: - Button Action
@@ -33,9 +39,14 @@ class AddChannelViewController: UIViewController {
     }
     
     @IBAction func appPictureAction(_ sender: UIButton) {
+        
     }
+    
     @IBAction func addChannelAction(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func uploadCoverImageViewAction(_ sender: UIButton) {
+        
     }
 }
