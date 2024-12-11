@@ -41,11 +41,10 @@ class AddChannelViewController: UIViewController {
         }
         descriptionTextView.borderWidth = 1
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
-        let categoryTitles = categories.compactMap { $0.title }
+//        let categoryTitles = categories.compactMap { $0.title }
 
 //        categoryDropDown.optionArray = ["22","21"]
 //        categoryDropDown.arrowSize = CGFloat(10)
-        
         
 //        categoryDropDown.didSelect { selectedText, index, id in
 //            if let selectedCategory = self.categories.first(where: { $0.title == selectedText }) {
@@ -54,7 +53,7 @@ class AddChannelViewController: UIViewController {
 //                self.selectedCategory = selectedCategory
 //            }
 //        }
-
+        
     }
     
     private func openGallaryAlert(_ sender: UIButton) {
