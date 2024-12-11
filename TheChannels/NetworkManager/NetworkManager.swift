@@ -14,9 +14,12 @@ enum API: String {
     case followChannel = "index.php?function=follow"
     case exitChannel = "index.php?function=exit"
     case viewChannel = "index.php?function=view"
-    case fowardChannel = "index.php?function=forward"
+    case forwardChannel = "index.php?function=forward"
     case searchChannel = "index.php?function=getchannels"
     case addChannel = "index.php?function=addchannel"
+    case channelDetails = "index.php?function=getchanneldetails"
+    case reportChannel = "index.php?function=report"
+
 }
 
 enum ContentType: String {

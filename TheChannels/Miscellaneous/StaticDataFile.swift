@@ -16,6 +16,7 @@ struct Controller {
     static let channelDetailsVC = "ChannelDetailViewController"
     static let addChannelVC = "AddChannelViewController"
     static let notificationPermissionVC = "NotificationPermissionViewController"
+    static let upgradeToProVC = "UpgradeToProViewController"
 }
 
 struct Cell {
@@ -24,15 +25,9 @@ struct Cell {
     static let onboardingCell = "OnboardingCollectionViewCell"
 }
 
-struct AppConfigs
-{
+struct AppConfigs {
     static let appName : String = "The Channels"
-    
-//    static let kBaseURL  = ""
-//    static let kGetCategoriesURL  = kBaseURL + "getcategories.php"
-//    static let kGetChannelsURL  = kBaseURL + "getchannels.php"
-//    static let kChannelActionURL  = kBaseURL + "action.php"
-    
+        
     static let kAppStoreAppId = "1473551769"
     static let kAppSharingURL : String = "https://apps.apple.com/app/slideshow-maker-photo-video/id1473551769"
     
@@ -42,9 +37,7 @@ struct AppConfigs
     static let kAppPrivacyPolicyURL : String = "https://support.google.com/admob/answer/6128543?hl=en"
 }
 
-
-func getIntroTitles()->[[String : String]]
-{
+func getIntroTitles()->[[String : String]] {
     var arrIntroSlides = [[String : String]]()
     arrIntroSlides.append(["image":"icintro_0","title":"#1 Channel Listing App\non the AppStore"])
     arrIntroSlides.append(["image":"icintro_1","title":"Join Premium Channels"])
@@ -52,9 +45,7 @@ func getIntroTitles()->[[String : String]]
     return arrIntroSlides
 }
 
-
-func getMoreApps()->[[String : String]]
-{
+func getMoreApps()->[[String : String]] {
     var arrApps = [[String : String]]()
     arrApps.append([
         "appimage":"https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/2c/0b/4a/2c0b4a35-a5a2-2a12-3432-962063fbae31/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/292x0w.webp",

@@ -23,13 +23,16 @@ class AddChannelViewController: UIViewController {
     
     var categories: [Categories] = []
     var isImagePickerOpen : Bool = false
-    var imageLogo = UIImageView()
-    var imageData = Data()
+    var imageData: Data?
+    var coverImageData: Data?
     var selectedCategory: Categories?
+    var isFromCoverPhoto: Bool = false
+    let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupDatePicker()
     }
     
     func setupUI() {
@@ -41,6 +44,10 @@ class AddChannelViewController: UIViewController {
         }
         descriptionTextView.borderWidth = 1
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
+        
+        if categories.isEmpty {
+            getCategories()
+        }
 //        let categoryTitles = categories.compactMap { $0.title }
 
 //        categoryDropDown.optionArray = ["22","21"]
@@ -54,6 +61,32 @@ class AddChannelViewController: UIViewController {
 //            }
 //        }
         
+    }
+    
+    private func setupDatePicker() {
+        datePicker.datePickerMode = .date
+        
+        if #available(iOS 14.0, *) {
+            datePicker.preferredDatePickerStyle = .wheels
+        }
+        
+        dateTextField.inputView = datePicker
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneButtonTapped))
+        toolbar.setItems([doneButton], animated: true)
+        
+        dateTextField.inputAccessoryView = toolbar
+    }
+    
+    @objc private func doneButtonTapped() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        dateTextField.text = formatter.string(from: datePicker.date)
+        
+        dateTextField.resignFirstResponder()
     }
     
     private func openGallaryAlert(_ sender: UIButton) {
@@ -74,8 +107,14 @@ class AddChannelViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }))
-        actionSheet.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: { _ in
-            self.imageLogo.image = nil
+        actionSheet.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: { [self] _ in
+            if isFromCoverPhoto {
+                self.coverImageView.image = nil
+                uploadCoverImageView.isHidden = false
+                chooseCoverImageView.isHidden = false
+            } else {
+                self.pictureImageView.image = nil
+            }
         }))
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         if let popoverController = actionSheet.popoverPresentationController {
@@ -91,15 +130,16 @@ class AddChannelViewController: UIViewController {
     }
     
     @IBAction func appPictureAction(_ sender: UIButton) {
+        isFromCoverPhoto = false
         openGallaryAlert(sender)
     }
     
     @IBAction func addChannelAction(_ sender: UIButton) {
         addChannel()
-        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func uploadCoverImageViewAction(_ sender: UIButton) {
+        isFromCoverPhoto = true
         openGallaryAlert(sender)
     }
 }
@@ -110,13 +150,16 @@ extension AddChannelViewController: UIImagePickerControllerDelegate,UINavigation
         guard let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             return
         }
-//        var finalImage = Utils.fixOrientation(img: pickedImage)
-        
-//        pickedImage = pickedImage.resized(toWidth: 300)!
         isImagePickerOpen = false
-        imageLogo.image = pickedImage
-        pictureImageView.image = pickedImage
-        imageData = pickedImage.pngData() ?? Data()
+        if isFromCoverPhoto {
+            coverImageView.image = pickedImage
+            coverImageData = pickedImage.pngData() ?? Data()
+            chooseCoverImageView.isHidden = true
+            uploadCoverImageView.isHidden = true
+        } else {
+            pictureImageView.image = pickedImage
+            imageData = pickedImage.pngData() ?? Data()
+        }
         self.dismiss(animated: true, completion: nil)
     }
 }

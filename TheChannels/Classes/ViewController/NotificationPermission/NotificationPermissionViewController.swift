@@ -22,6 +22,12 @@ class NotificationPermissionViewController: UIViewController {
         stayUpdateView.layer.cornerRadius = 8
     }
     
+    private func showAlert(title: String, message: String) {
+           let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           present(alert, animated: true, completion: nil)
+       }
+    
     func moveToHomeVC() {
         let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
         if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.homeVC) as? HomeViewController {
@@ -35,6 +41,23 @@ class NotificationPermissionViewController: UIViewController {
     }
     
     @IBAction func stayUpdateAction(_ sender: UIButton) {
-        moveToHomeVC()
+        // Request notification permission
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+                DispatchQueue.main.async {
+                    if let error = error {
+                        self.showAlert(title: "Error", message: error.localizedDescription)
+                        return
+                    }
+                    
+                    if granted {
+                        self.showAlert(title: "Permission Granted", message: "Notifications are now enabled.")
+                        self.moveToHomeVC()
+                    } else {
+                        self.showAlert(title: "Permission Denied", message: "You can enable notifications in Settings.")
+                    }
+                }
+            }
+        
     }
 }
