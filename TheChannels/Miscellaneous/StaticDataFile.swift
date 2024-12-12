@@ -83,5 +83,3 @@ func getMoreApps()->[[String : String]] {
 
     return arrApps
 }
-
-

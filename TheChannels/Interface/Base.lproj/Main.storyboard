@@ -7,7 +7,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -823,7 +822,7 @@
                                 <rect key="frame" x="0.0" y="77" width="375" height="590"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNa-Y9-FL7">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="610"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="585"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IQKeyboardManagerFlowDiagram.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="qpP-CR-lZT">
                                                 <rect key="frame" x="142.5" y="18" width="90" height="90"/>
@@ -845,51 +844,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gn-bJ-qK7">
-                                                <rect key="frame" x="0.0" y="189.5" width="375" height="75"/>
-                                                <subviews>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="m58-ad-fDy">
-                                                        <rect key="frame" x="21" y="0.0" width="333" height="75"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gen-ar-Vxa">
-                                                            <size key="itemSize" width="128" height="128"/>
-                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        </collectionViewFlowLayout>
-                                                        <cells>
-                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="wjk-m7-Ict">
-                                                                <rect key="frame" x="-1075.5" y="0.0" width="2484" height="2979"/>
-                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KIh-hY-3t5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="2484" height="2979"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                    <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgintro" translatesAutoresizingMaskIntoConstraints="NO" id="luH-Ql-D3I">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="2484" height="2979"/>
-                                                                        </imageView>
-                                                                    </subviews>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="luH-Ql-D3I" secondAttribute="bottom" id="BXC-bh-reF"/>
-                                                                        <constraint firstItem="luH-Ql-D3I" firstAttribute="leading" secondItem="KIh-hY-3t5" secondAttribute="leading" id="Ls2-iK-H66"/>
-                                                                        <constraint firstItem="luH-Ql-D3I" firstAttribute="top" secondItem="KIh-hY-3t5" secondAttribute="top" id="bee-as-MBj"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="luH-Ql-D3I" secondAttribute="trailing" id="mIe-dc-fZR"/>
-                                                                    </constraints>
-                                                                </collectionViewCellContentView>
-                                                            </collectionViewCell>
-                                                        </cells>
-                                                    </collectionView>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                                <rect key="frame" x="0.0" y="189.5" width="375" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="m58-ad-fDy" secondAttribute="bottom" id="MSC-ZG-mbT"/>
-                                                    <constraint firstItem="m58-ad-fDy" firstAttribute="leading" secondItem="7Gn-bJ-qK7" secondAttribute="leading" constant="21" id="OGr-Po-edQ"/>
-                                                    <constraint firstAttribute="trailing" secondItem="m58-ad-fDy" secondAttribute="trailing" constant="21" id="i0v-hP-hEC"/>
-                                                    <constraint firstAttribute="height" constant="75" id="mdX-4N-erY"/>
-                                                    <constraint firstItem="m58-ad-fDy" firstAttribute="top" secondItem="7Gn-bJ-qK7" secondAttribute="top" id="wWI-w9-exB"/>
+                                                    <constraint firstAttribute="height" constant="50" id="mdX-4N-erY"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qd-hj-sM8">
-                                                <rect key="frame" x="12" y="282.5" width="161.5" height="35"/>
+                                                <rect key="frame" x="12" y="257.5" width="161.5" height="35"/>
                                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="V7A-5Z-kmo"/>
@@ -904,7 +866,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcQ-Kb-JHI">
-                                                <rect key="frame" x="202" y="282.5" width="161" height="35"/>
+                                                <rect key="frame" x="202" y="257.5" width="161" height="35"/>
                                                 <color key="backgroundColor" systemColor="systemBlueColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Wwd-Ze-elg"/>
@@ -917,7 +879,7 @@
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="bIv-h8-r9h">
-                                                <rect key="frame" x="12" y="335.5" width="351" height="97"/>
+                                                <rect key="frame" x="12" y="310.5" width="351" height="97"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DSo-aJ-oOL">
                                                         <rect key="frame" x="0.0" y="0.0" width="109" height="97"/>
@@ -1039,7 +1001,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ail-Rs-zhv">
-                                                <rect key="frame" x="12" y="450.5" width="351" height="36.5"/>
+                                                <rect key="frame" x="12" y="425.5" width="351" height="36.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mi0-Gh-hAH">
                                                         <rect key="frame" x="8" y="8" width="335" height="20.5"/>
@@ -1057,7 +1019,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oN8-Ad-e83">
-                                                <rect key="frame" x="8" y="505" width="359" height="93"/>
+                                                <rect key="frame" x="8" y="480" width="359" height="93"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjQ-Cm-yI8">
                                                         <rect key="frame" x="8" y="8" width="73" height="30"/>
@@ -1168,6 +1130,7 @@
                         <outlet property="forwardView" destination="eDB-yw-XHR" id="Rou-fK-brm"/>
                         <outlet property="groupActionView" destination="oN8-Ad-e83" id="oUq-w2-aUJ"/>
                         <outlet property="nameLabel" destination="RQh-mm-uYI" id="voe-ao-eel"/>
+                        <outlet property="profileImageView" destination="7Gn-bJ-qK7" id="ACb-hF-5CZ"/>
                         <outlet property="reportChannelButton" destination="7qd-hj-sM8" id="Uzb-Ot-IOD"/>
                         <outlet property="shareView" destination="y4a-fr-rfV" id="jG4-Aa-0nz"/>
                     </connections>
@@ -1304,22 +1267,19 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

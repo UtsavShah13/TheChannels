@@ -10,6 +10,7 @@ import SDWebImage
 
 class ChannelDetailViewController: UIViewController {
     
+    @IBOutlet weak var profileImageView: UIView!
     @IBOutlet weak var groupActionView: UIView!
     @IBOutlet weak var detailView: UIView!
     @IBOutlet weak var detailLabel: UILabel!
@@ -27,13 +28,87 @@ class ChannelDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getChannelDetail()
+        getChannelDetail(completion: { [self] in
+//            let images = ["icappstorelogo", "iccnpremiumbanner", "iccnpremiumbg"]
+            let imageSize: CGFloat = 45 // Size of each image
+             let overlapOffset: CGFloat = -10 // Negative for overlap
+             var previousImageView: UIImageView?
+
+             // A container view for all images
+            let containerView = UIView()
+             containerView.translatesAutoresizingMaskIntoConstraints = false
+             profileImageView.addSubview(containerView)
+             
+             // Center the container view within profileImageView
+             NSLayoutConstraint.activate([
+                 containerView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+                 containerView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
+             ])
+            if let images = channelFollowresImage {
+                for (index, imageName) in images.enumerated() {
+                    let imageUrl = URL(string: imageName)
+                    let imageView = UIImageView() // Create an instance of UIImageView
+                    imageView.sd_setImage(with: imageUrl)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    imageView.contentMode = .scaleAspectFill
+                    imageView.clipsToBounds = true
+                    imageView.layer.cornerRadius = imageSize / 2
+                    imageView.layer.zPosition = CGFloat(images.count - index) // First image on top
+                    
+                    containerView.addSubview(imageView)
+                    
+                    NSLayoutConstraint.activate([
+                        imageView.widthAnchor.constraint(equalToConstant: imageSize),
+                        imageView.heightAnchor.constraint(equalToConstant: imageSize),
+                        imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)
+                    ])
+                    
+                    if let previous = previousImageView {
+                        NSLayoutConstraint.activate([
+                            imageView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: overlapOffset)
+                        ])
+                    } else {
+                        // Position the first image
+                        NSLayoutConstraint.activate([
+                            imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+                        ])
+                    }
+                    
+                    // If it's the last image, add the three dots overlay
+                    if index == images.count - 1 {
+                        let dotsLabel = UILabel()
+                        dotsLabel.translatesAutoresizingMaskIntoConstraints = false
+                        dotsLabel.text = "●●●"
+                        dotsLabel.textAlignment = .center
+                        dotsLabel.textColor = UIColor.white.withAlphaComponent(0.7) // Opacity
+                        dotsLabel.font = UIFont.systemFont(ofSize: 12)
+                        
+                        imageView.addSubview(dotsLabel)
+                        
+                        NSLayoutConstraint.activate([
+                            dotsLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+                            dotsLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+                        ])
+                    }
+                    
+                    previousImageView = imageView
+                }
+                // Adjust container view's width based on total images
+
+                let totalWidth = imageSize + CGFloat(images.count - 1) * (imageSize + overlapOffset)
+                NSLayoutConstraint.activate([
+                    containerView.widthAnchor.constraint(equalToConstant: totalWidth),
+                    containerView.heightAnchor.constraint(equalToConstant: imageSize)
+                ])
+            }
+
+        })
         fillData()
         setupUI()
     }
     
     func setupUI() {
-    
+        
         reportChannelButton.layer.cornerRadius = 8
         addChannelButton.layer.cornerRadius = 8
         
@@ -42,7 +117,6 @@ class ChannelDetailViewController: UIViewController {
         addShadow(view: forwardView)
         addShadow(view: followView)
         addShadow(view: groupActionView)
-
     }
     
     func fillData() {
@@ -87,8 +161,9 @@ class ChannelDetailViewController: UIViewController {
     
 //    MARK: - Button Action
     @IBAction func reportGroupAction(_ sender: UIButton) {
-        
+        reportChannelApi()
     }
+    
     @IBAction func exitGroupAction(_ sender: UIButton) {
         exitChannelApi()
     }
@@ -104,7 +179,6 @@ class ChannelDetailViewController: UIViewController {
     @IBAction func forwardAction(_ sender: UIButton) {
         forwardChannelApi()
     }
-    
     
     @IBAction func followAction(_ sender: UIButton) {
         followChannelApi()

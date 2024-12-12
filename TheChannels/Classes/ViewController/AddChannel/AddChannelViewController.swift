@@ -29,6 +29,39 @@ class AddChannelViewController: UIViewController {
     var isFromCoverPhoto: Bool = false
     let datePicker = UIDatePicker()
     
+    let countryCodes = [
+        ["country": "United States", "code": "+1"],
+        ["country": "Canada", "code": "+1"],
+        ["country": "United Kingdom", "code": "+44"],
+        ["country": "India", "code": "+91"],
+        ["country": "Australia", "code": "+61"],
+        ["country": "Germany", "code": "+49"],
+        ["country": "France", "code": "+33"],
+        ["country": "Italy", "code": "+39"],
+        ["country": "Spain", "code": "+34"],
+        ["country": "Mexico", "code": "+52"],
+        ["country": "Brazil", "code": "+55"],
+        ["country": "China", "code": "+86"],
+        ["country": "Japan", "code": "+81"],
+        ["country": "South Korea", "code": "+82"],
+        ["country": "Russia", "code": "+7"],
+        ["country": "South Africa", "code": "+27"],
+        ["country": "Saudi Arabia", "code": "+966"],
+        ["country": "United Arab Emirates", "code": "+971"],
+        ["country": "Singapore", "code": "+65"],
+        ["country": "Malaysia", "code": "+60"],
+        ["country": "Thailand", "code": "+66"],
+        ["country": "Indonesia", "code": "+62"],
+        ["country": "New Zealand", "code": "+64"],
+        ["country": "Philippines", "code": "+63"],
+        ["country": "Vietnam", "code": "+84"],
+        ["country": "Turkey", "code": "+90"],
+        ["country": "Pakistan", "code": "+92"],
+        ["country": "Bangladesh", "code": "+880"],
+        ["country": "Nigeria", "code": "+234"],
+        ["country": "Egypt", "code": "+20"]
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

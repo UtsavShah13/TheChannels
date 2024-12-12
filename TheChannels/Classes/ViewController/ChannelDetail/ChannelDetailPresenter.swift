@@ -9,12 +9,13 @@ import Foundation
 
 extension ChannelDetailViewController {
     
-    func getChannelDetail() {
+    func getChannelDetail(completion: @escaping ()->Void) {
         Utils.showSpinner()
         let param = ["channel_id": channel?.channel_id ?? ""]
         NetworkManager.shared.getChannelDetailAPI(param: param, completion: { [self] result in
             print(result as Any)
-            channelFollowresImage = result 
+            channelFollowresImage = result
+            completion()
             Utils.hideSpinner()
         })
     }
