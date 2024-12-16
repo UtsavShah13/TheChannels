@@ -10,7 +10,6 @@ import SDWebImage
 
 class UpgradeToPremiumImageCell: UITableViewCell {
 
-
     @IBOutlet weak var tryFreeButton: UIButton!
     @IBOutlet weak var premiumImageView: UIImageView!
     
@@ -30,6 +29,68 @@ class UpgradeToPremiumImageCell: UITableViewCell {
     
 }
 
+class MoreAppCollectionCell: UICollectionViewCell {
+    
+    @IBOutlet weak var appImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        appImageView.layer.cornerRadius = 12
+    }
+
+}
+
+class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+
+    @IBOutlet weak var appCollectionView: UICollectionView!
+    @IBOutlet weak var selectedAppLabel: UILabel!
+    @IBOutlet weak var installButton: UIButton!
+    var getMoreApps: [[String : String]] = []
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setup()
+        getMoreApps = MoreApps.getMoreApps()
+        appCollectionView.reloadData()
+        print(getMoreApps.count)
+    }
+    
+    func setup() {
+        installButton.layer.cornerRadius = 8
+        appCollectionView.delegate = self
+        appCollectionView.dataSource = self
+        
+        let layout = UICollectionViewFlowLayout()
+//        layout.itemSize = CGSize(width: 120, height: 120)
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 16
+        layout.scrollDirection = .horizontal
+        appCollectionView.showsHorizontalScrollIndicator = false
+        appCollectionView.collectionViewLayout = layout
+    }
+    
+    @IBAction func installButtonAction(_ sender: UIButton) {
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return getMoreApps.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoreAppCollectionCell", for: indexPath) as? MoreAppCollectionCell {
+            let imageUrl = URL(string: getMoreApps[indexPath.row]["appimage"] ?? "")
+            cell.appImageView.sd_setImage(with: imageUrl)
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 45, height: 45)
+    }
+}
+
 class SettingOptionCell: UITableViewCell {
 
     @IBOutlet weak var mainView: UIView!
@@ -38,7 +99,6 @@ class SettingOptionCell: UITableViewCell {
     @IBOutlet weak var optionImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-//        addShadow(view: mainView)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -96,7 +156,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "UpgradeToPremiumImageCell", for: indexPath) as? UpgradeToPremiumImageCell {
                 return cell
             }
-            
         } else if indexPath.section == 2 || indexPath.section == 3 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingOptionCell", for: indexPath) as? SettingOptionCell {
                 if indexPath.section == 2 {
@@ -106,7 +165,13 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 return cell
             }
+        } else if indexPath.section == 1 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MoreAppCell", for: indexPath) as? MoreAppCell {
+                cell.selectedAppLabel.text = "PDF App"
+                return cell
+            }
         }
+        
         return UITableViewCell()
     }
     
@@ -119,7 +184,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard section != 0 else { return nil } // No header for section 0
+        guard section != 0 else { return nil }
 
         let headerView = UIView()
         headerView.backgroundColor = .clear
