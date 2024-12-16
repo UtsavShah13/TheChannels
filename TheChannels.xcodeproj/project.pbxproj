@@ -21,7 +21,7 @@
 		6F27AFA62CFA3977007E6645 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9C2CFA3977007E6645 /* UIViewControllerExtension.swift */; };
 		6F27AFA92CFA3977007E6645 /* TextFiledExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */; };
 		6F27AFAA2CFA3977007E6645 /* UIViewExtesnsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AF9D2CFA3977007E6645 /* UIViewExtesnsion.swift */; };
-		6F27AFAE2CFA3DB9007E6645 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */; };
+		6F27AFAE2CFA3DB9007E6645 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27AFAD2CFA3DB9007E6645 /* Setting.swift */; };
 		6F4130FB2CFB986200F3A49A /* ChannelsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4130FA2CFB986200F3A49A /* ChannelsTableViewCell.xib */; };
 		6F4130FC2CFB986200F3A49A /* ChannelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4130F92CFB986200F3A49A /* ChannelsTableViewCell.swift */; };
 		6F4131012CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F4131002CFB9CAC00F3A49A /* CategoriesCollectionViewCell.xib */; };
@@ -39,6 +39,7 @@
 		6F8AACC12D0786DC00794643 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC02D0786DC00794643 /* SDWebImage */; };
 		6F8AACC32D0786DC00794643 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC22D0786DC00794643 /* SDWebImageMapKit */; };
 		6F8AACC62D07875000794643 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F8AACC52D07875000794643 /* IQKeyboardManagerSwift */; };
+		6FB6A94C2D0E09670088E17D /* iOSDropDown in Frameworks */ = {isa = PBXBuildFile; productRef = 6FB6A94B2D0E09670088E17D /* iOSDropDown */; };
 		6FC15F422CFB90D40056F901 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC15F412CFB90C60056F901 /* OnboardingViewController.swift */; };
 		A7BE77802CF9C77D00D9B65B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE777F2CF9C77D00D9B65B /* AppDelegate.swift */; };
 		A7BE77842CF9C77D00D9B65B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BE77832CF9C77D00D9B65B /* HomeViewController.swift */; };
@@ -62,7 +63,7 @@
 		6F27AF9A2CFA3977007E6645 /* TextFiledExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledExtention.swift; sourceTree = "<group>"; };
 		6F27AF9C2CFA3977007E6645 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		6F27AF9D2CFA3977007E6645 /* UIViewExtesnsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtesnsion.swift; sourceTree = "<group>"; };
-		6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		6F27AFAD2CFA3DB9007E6645 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		6F4130F92CFB986200F3A49A /* ChannelsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewCell.swift; sourceTree = "<group>"; };
 		6F4130FA2CFB986200F3A49A /* ChannelsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChannelsTableViewCell.xib; sourceTree = "<group>"; };
 		6F4130FF2CFB9CAC00F3A49A /* CategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 				6F8AACC12D0786DC00794643 /* SDWebImage in Frameworks */,
 				6F7E6CC32D08B5A300EB5981 /* iOSDropDown in Frameworks */,
 				6F8AACC62D07875000794643 /* IQKeyboardManagerSwift in Frameworks */,
+				6FB6A94C2D0E09670088E17D /* iOSDropDown in Frameworks */,
 				6F8AACC32D0786DC00794643 /* SDWebImageMapKit in Frameworks */,
 				6F6796702CFF8DA5008EFA9A /* SVProgressHUD in Frameworks */,
 			);
@@ -263,7 +265,7 @@
 		6F6796732CFF8EFB008EFA9A /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				6F27AFAD2CFA3DB9007E6645 /* SettingViewController.swift */,
+				6F27AFAD2CFA3DB9007E6645 /* Setting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -350,7 +352,7 @@
 				6F67966E2CFF8DA5008EFA9A /* XCRemoteSwiftPackageReference "SVProgressHUD" */,
 				6F8AACBF2D0786DC00794643 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				6F8AACC42D07875000794643 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				6F7E6CC12D08B5A300EB5981 /* XCRemoteSwiftPackageReference "iOSDropDown" */,
+				6FB6A94A2D0E09660088E17D /* XCRemoteSwiftPackageReference "iOSDropDown" */,
 			);
 			productRefGroup = A7BE777D2CF9C77D00D9B65B /* Products */;
 			projectDirPath = "";
@@ -392,7 +394,7 @@
 				6F27AF9F2CFA3977007E6645 /* ColorExtension.swift in Sources */,
 				6F6796792CFF958C008EFA9A /* ChannelModel.swift in Sources */,
 				6F6796692CFF8C30008EFA9A /* CategoryModel.swift in Sources */,
-				6F27AFAE2CFA3DB9007E6645 /* SettingViewController.swift in Sources */,
+				6F27AFAE2CFA3DB9007E6645 /* Setting.swift in Sources */,
 				6F5BAA872D0A18F40087A62F /* ChannelDetailModel.swift in Sources */,
 				6FC15F422CFB90D40056F901 /* OnboardingViewController.swift in Sources */,
 				6F5BAA852D0A17290087A62F /* ChannelDetailPresenter.swift in Sources */,
@@ -665,6 +667,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		6FB6A94A2D0E09660088E17D /* XCRemoteSwiftPackageReference "iOSDropDown" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jriosdev/iOSDropDown.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -692,6 +702,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F8AACC42D07875000794643 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		6FB6A94B2D0E09670088E17D /* iOSDropDown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FB6A94A2D0E09660088E17D /* XCRemoteSwiftPackageReference "iOSDropDown" */;
+			productName = iOSDropDown;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

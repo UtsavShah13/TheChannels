@@ -81,7 +81,7 @@ class AddChannelViewController: UIViewController {
         if categories.isEmpty {
             getCategories()
         }
-//        let categoryTitles = categories.compactMap { $0.title }
+        let categoryTitles = categories.compactMap { $0.title }
 
 //        categoryDropDown.optionArray = ["22","21"]
 //        categoryDropDown.arrowSize = CGFloat(10)
