@@ -31,7 +31,6 @@ class NotificationPermissionViewController: UIViewController {
     func moveToHomeVC() {
         let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
         if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.homeVC) as? HomeViewController {
-            let userDefaults = UserDefaults.standard
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -51,7 +50,6 @@ class NotificationPermissionViewController: UIViewController {
                     }
                     
                     if granted {
-                        self.showAlert(title: "Permission Granted", message: "Notifications are now enabled.")
                         self.moveToHomeVC()
                     } else {
                         self.showAlert(title: "Permission Denied", message: "You can enable notifications in Settings.")

@@ -8,6 +8,8 @@
 import UIKit
 import SDWebImage
 
+// MARK: - UpgradeToPremiumImageCell
+
 class UpgradeToPremiumImageCell: UITableViewCell {
 
     @IBOutlet weak var tryFreeButton: UIButton!
@@ -29,16 +31,19 @@ class UpgradeToPremiumImageCell: UITableViewCell {
     
 }
 
+// MARK: - MoreAppCollectionCell
+
 class MoreAppCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var appImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        appImageView.layer.cornerRadius = 12
+        appImageView.layer.cornerRadius = 18
     }
-
 }
+
+// MARK: - MoreAppCell
 
 class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -46,13 +51,20 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     @IBOutlet weak var selectedAppLabel: UILabel!
     @IBOutlet weak var installButton: UIButton!
     var getMoreApps: [[String : String]] = []
+    var currentSelectedApp: [String : String] = [:]
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
         getMoreApps = MoreApps.getMoreApps()
+        getMoreApps.append([:])
+        getMoreApps.insert([:], at: 0)
         appCollectionView.reloadData()
-        print(getMoreApps.count)
+        DispatchQueue.main.async {
+             let indexPath = IndexPath(item: 2, section: 0)
+             self.appCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            self.updateCenteredAppName()
+         }
     }
     
     func setup() {
@@ -61,15 +73,50 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
         appCollectionView.dataSource = self
         
         let layout = UICollectionViewFlowLayout()
-//        layout.itemSize = CGSize(width: 120, height: 120)
-        layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
+        layout.itemSize = CGSize(width: 80, height: 80)
+        layout.minimumLineSpacing = 30  // Vertical spacing between rows
+//        layout.minimumInteritemSpacing = 25 // Horizontal spacing between cells
         layout.scrollDirection = .horizontal
         appCollectionView.showsHorizontalScrollIndicator = false
         appCollectionView.collectionViewLayout = layout
     }
     
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateCenteredAppName()
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updateCenteredAppName()
+        }
+    }
+
+    func updateCenteredAppName() {
+        // Calculate center point of the collection view
+        let centerPoint = CGPoint(x: appCollectionView.contentOffset.x + (appCollectionView.frame.size.width / 2),
+                                  y: appCollectionView.frame.size.height / 2)
+
+        // Find the indexPath of the cell at the center point
+        if let indexPath = appCollectionView.indexPathForItem(at: centerPoint) {
+            currentSelectedApp = getMoreApps[indexPath.row]
+            if let appName = currentSelectedApp["apptitle"] {
+                selectedAppLabel.text = appName
+            } else {
+                selectedAppLabel.text = ""
+            }
+        }
+    }
+    
+    func openURL(urlString: String) {
+        if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            print("Invalid URL or cannot open URL")
+        }
+    }
+
     @IBAction func installButtonAction(_ sender: UIButton) {
+        openURL(urlString: currentSelectedApp["appurl"] ?? "")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -87,26 +134,27 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 45, height: 45)
+           return CGSize(width: 80, height: 80)
     }
 }
+
+// MARK: - SettingOptionCell
 
 class SettingOptionCell: UITableViewCell {
 
+    @IBOutlet weak var imageParentView: UIView!
     @IBOutlet weak var mainView: UIView!
-
     @IBOutlet weak var optionLabel: UILabel!
     @IBOutlet weak var optionImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+        imageParentView.layer.cornerRadius = 8
     }
     
 }
+
+// MARK: - SettingViewController
 
 class SettingViewController: UIViewController {
 
@@ -115,8 +163,11 @@ class SettingViewController: UIViewController {
     var settingHeaders = ["", "More APPS", "SPREAD LOVE", "LEGAL"]
     var spreadLoveTitles = ["Rate Us", "Share App", "Help"]
     var legalTitles = ["Privacy Policy", "Terms of use"]
-    var spreadLoveIcons = ["rate", "share", "help"]
-    var legalIcons = ["privacy", "terms"]
+    var spreadLoveIcons = ["iccnrateus", "arrowshape.turn.up.right.fill", "hand.thumbsup.fill"]
+    var legalIcons = ["hand.raised.fingers.spread.fill", "list.bullet.clipboard.fill"]
+    
+    var spreadLoveBGColor: [UIColor] = [UIColor.colorFromHex("EAEAEA", alpha: 1) ?? .white,UIColor.colorFromHex("F9A904", alpha: 1) ?? .yellow,UIColor.colorFromHex("7616FE", alpha: 1) ?? .purple]
+    var legalBGColor: [UIColor] = [UIColor.colorFromHex("2179FF", alpha: 1) ?? .blue, .red]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,10 +179,20 @@ class SettingViewController: UIViewController {
         tableView.dataSource = self
     }
     
+    func moveToUpgradeVC() {
+        let storyBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
+        if let vc = storyBoard.instantiateViewController(withIdentifier: Controller.upgradeToProVC) as? UpgradeToProViewController {
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+        
     @IBAction func backAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
 }
+
+// MARK: - SettingViewController: UITableViewDelegate, UITableViewDataSource
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -160,8 +221,29 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "SettingOptionCell", for: indexPath) as? SettingOptionCell {
                 if indexPath.section == 2 {
                     cell.optionLabel.text = spreadLoveTitles[indexPath.row]
+                    cell.imageParentView.backgroundColor = spreadLoveBGColor[indexPath.row]
+                    if indexPath.row == 0 {
+                        cell.optionImageView.image = UIImage(named: spreadLoveIcons[0])
+
+                    } else {
+                        if #available(iOS 13.0, *) {
+                            // Use SF Symbols for iOS 13 and later
+                            cell.optionImageView.image = UIImage(systemName: spreadLoveIcons[indexPath.row])
+                        } else {
+                            // Use custom images for iOS 12 and earlier
+                            cell.optionImageView.image = UIImage(named: spreadLoveIcons[indexPath.row])
+                        }
+                    }
                 } else if indexPath.section == 3 {
+                    cell.imageParentView.backgroundColor = legalBGColor[indexPath.row]
                     cell.optionLabel.text = legalTitles[indexPath.row]
+                    if #available(iOS 13.0, *) {
+                        // Use SF Symbols for iOS 13 and later
+                        cell.optionImageView.image = UIImage(systemName: legalIcons[indexPath.row])
+                    } else {
+                        // Use custom images for iOS 12 and earlier
+                        cell.optionImageView.image = UIImage(named: legalIcons[indexPath.row])
+                    }
                 }
                 return cell
             }
@@ -173,6 +255,19 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UITableViewCell()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            moveToUpgradeVC()
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                redirectToAppStore()
+            } else if indexPath.row == 1 {
+                shareURL(from: self, urlString: "")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

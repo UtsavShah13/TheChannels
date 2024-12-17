@@ -9,6 +9,32 @@ import StoreKit
 
 
 extension UIViewController {
+    
+    func redirectToAppStore() {
+        if let url = URL(string: "itms-apps://itunes.apple.com/app/id<YOUR_APP_ID>") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func shareURL(from viewController: UIViewController, urlString: String) {
+        if let url = URL(string: urlString) {
+            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            
+            // For iPad support
+            if let popoverController = activityVC.popoverPresentationController {
+                popoverController.sourceView = viewController.view
+                popoverController.sourceRect = CGRect(x: viewController.view.bounds.midX,
+                                                      y: viewController.view.bounds.midY,
+                                                      width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+            }
+            
+            viewController.present(activityVC, animated: true, completion: nil)
+        } else {
+            print("Invalid URL")
+        }
+    }
+    
     func setLeftAlignTitleView(font: UIFont, text: String, textColor: UIColor) {
         guard let navFrame = navigationController?.navigationBar.frame else{
             return

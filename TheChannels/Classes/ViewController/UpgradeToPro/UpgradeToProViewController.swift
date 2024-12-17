@@ -12,7 +12,6 @@ class UpgradeToProViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func dismissAction(_ sender: Any) {
