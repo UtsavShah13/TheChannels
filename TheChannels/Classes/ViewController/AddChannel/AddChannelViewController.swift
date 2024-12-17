@@ -8,8 +8,10 @@
 import UIKit
 import iOSDropDown
 
+
 class AddChannelViewController: UIViewController {
 
+    @IBOutlet weak var countryCodeDropDown: DropDown!
     @IBOutlet weak var categoryDropDown: DropDown!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var addChannelBtn: UIButton!
@@ -82,6 +84,17 @@ class AddChannelViewController: UIViewController {
             getCategories()
         }
         let categoryTitles = categories.compactMap { $0.title }
+        
+        countryCodeDropDown.optionArray = ["Option 1", "Option 2", "Option 3"]
+        //Its Id Values and its optional
+        countryCodeDropDown.optionIds = [1,23,54,22]
+
+        // Image Array its optional
+//        countryCodeDropDown.ImageArray = [👩🏻‍🦳,🙊,🥞]
+        // The the Closure returns Selected Index and String
+        countryCodeDropDown.didSelect{(selectedText , index ,id) in
+//        self.valueLabel.text = "Selected String: \(selectedText) \n index: \(index)"
+        }//        countryCodes["code"]
 
 //        categoryDropDown.optionArray = ["22","21"]
 //        categoryDropDown.arrowSize = CGFloat(10)

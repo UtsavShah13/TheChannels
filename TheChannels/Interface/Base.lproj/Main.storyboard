@@ -536,23 +536,44 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="9999999999" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M6g-wa-qjf">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6EZ-KZ-7FK">
                                                                 <rect key="frame" x="0.0" y="43" width="333" height="45"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" restorationIdentifier="DropDown" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfr-qM-og7" customClass="DropDown" customModule="TheChannels" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="45"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="75" id="11c-Hp-4kZ"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="9999999999" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M6g-wa-qjf">
+                                                                        <rect key="frame" x="75" y="0.0" width="258" height="45"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="45" id="Rl2-fI-PGq"/>
+                                                                    <constraint firstItem="bfr-qM-og7" firstAttribute="top" secondItem="6EZ-KZ-7FK" secondAttribute="top" id="Izk-hO-xeB"/>
+                                                                    <constraint firstItem="M6g-wa-qjf" firstAttribute="top" secondItem="6EZ-KZ-7FK" secondAttribute="top" id="Koe-L7-emd"/>
+                                                                    <constraint firstAttribute="height" constant="45" id="ONv-Yv-25y"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="bfr-qM-og7" secondAttribute="bottom" id="Ucb-ea-gzg"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="M6g-wa-qjf" secondAttribute="trailing" id="jc9-h1-OKI"/>
+                                                                    <constraint firstItem="M6g-wa-qjf" firstAttribute="leading" secondItem="bfr-qM-og7" secondAttribute="trailing" id="lTL-cI-WNS"/>
+                                                                    <constraint firstItem="bfr-qM-og7" firstAttribute="leading" secondItem="6EZ-KZ-7FK" secondAttribute="leading" id="wnU-h8-IoI"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="M6g-wa-qjf" secondAttribute="bottom" id="z1S-28-mSi"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
+                                                            </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="M6g-wa-qjf" firstAttribute="leading" secondItem="14j-12-XNj" secondAttribute="leading" id="3nf-an-m0R"/>
-                                                            <constraint firstAttribute="trailing" secondItem="M6g-wa-qjf" secondAttribute="trailing" id="9me-PX-sWb"/>
+                                                            <constraint firstAttribute="trailing" secondItem="6EZ-KZ-7FK" secondAttribute="trailing" id="CP9-Eh-VRB"/>
+                                                            <constraint firstItem="6EZ-KZ-7FK" firstAttribute="leading" secondItem="14j-12-XNj" secondAttribute="leading" id="EyJ-ND-7d7"/>
+                                                            <constraint firstAttribute="bottom" secondItem="6EZ-KZ-7FK" secondAttribute="bottom" constant="8" id="Gey-qC-ijU"/>
                                                             <constraint firstItem="Cgc-Da-5hG" firstAttribute="top" secondItem="14j-12-XNj" secondAttribute="top" constant="8" id="Mau-j4-qUV"/>
                                                             <constraint firstAttribute="trailing" secondItem="Cgc-Da-5hG" secondAttribute="trailing" id="RdP-NS-6OA"/>
-                                                            <constraint firstAttribute="bottom" secondItem="M6g-wa-qjf" secondAttribute="bottom" constant="8" id="f7z-uC-lic"/>
-                                                            <constraint firstItem="M6g-wa-qjf" firstAttribute="top" secondItem="Cgc-Da-5hG" secondAttribute="bottom" constant="5" id="lIs-fg-cnh"/>
+                                                            <constraint firstItem="6EZ-KZ-7FK" firstAttribute="top" secondItem="Cgc-Da-5hG" secondAttribute="bottom" constant="5" id="ioI-6J-1nO"/>
                                                             <constraint firstItem="Cgc-Da-5hG" firstAttribute="leading" secondItem="14j-12-XNj" secondAttribute="leading" id="pcp-ab-Z0j"/>
                                                         </constraints>
                                                     </view>
@@ -663,6 +684,7 @@
                         <outlet property="addChannelBtn" destination="4c3-I6-gdZ" id="Mjf-EB-Awg"/>
                         <outlet property="categoryDropDown" destination="h7C-fV-GSY" id="sGP-pQ-GFY"/>
                         <outlet property="chooseCoverImageView" destination="5Bl-KE-1Ei" id="sQd-Da-Kih"/>
+                        <outlet property="countryCodeDropDown" destination="bfr-qM-og7" id="gJg-LY-zY2"/>
                         <outlet property="coverImageView" destination="cVW-af-nl6" id="8xR-5V-lUG"/>
                         <outlet property="dateTextField" destination="e9x-SK-f2g" id="7XT-gL-pDG"/>
                         <outlet property="descriptionTextView" destination="9WB-6t-55i" id="arn-B4-m8n"/>
