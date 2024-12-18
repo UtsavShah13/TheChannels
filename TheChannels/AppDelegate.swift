@@ -28,13 +28,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainStoryBoard = UIStoryboard(name: StoryBoard.main, bundle: nil)
         
         if userDefaults.bool(forKey: "OnboardigComplete") {
-            let homeVC = mainStoryBoard.instantiateViewController(withIdentifier: Controller.homeVC) as? HomeViewController ?? HomeViewController()
-            // Push the vcw  to the navigat
-            navigate.pushViewController(homeVC, animated: false)
-            // Set the window’s root view controller
-            self.window!.rootViewController = navigate
-            // Present the window
-            self.window!.makeKeyAndVisible()
+            if !userDefaults.bool(forKey: "NotificationGranted") {
+                let homeVC = mainStoryBoard.instantiateViewController(withIdentifier: Controller.notificationPermissionVC) as? NotificationPermissionViewController ?? NotificationPermissionViewController()
+                // Push the vcw  to the navigat
+                navigate.pushViewController(homeVC, animated: false)
+                // Set the window’s root view controller
+                self.window!.rootViewController = navigate
+                // Present the window
+                self.window!.makeKeyAndVisible()
+
+            } else {
+                let homeVC = mainStoryBoard.instantiateViewController(withIdentifier: Controller.homeVC) as? HomeViewController ?? HomeViewController()
+                // Push the vcw  to the navigat
+                navigate.pushViewController(homeVC, animated: false)
+                // Set the window’s root view controller
+                self.window!.rootViewController = navigate
+                // Present the window
+                self.window!.makeKeyAndVisible()
+            }
 
         } else {
             let optionVC = mainStoryBoard.instantiateViewController(withIdentifier: Controller.onboardingVC) as? OnboardingViewController ?? OnboardingViewController()
@@ -44,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window!.rootViewController = navigate
             // Present the window
             self.window!.makeKeyAndVisible()
-
+            
         }
 
     }

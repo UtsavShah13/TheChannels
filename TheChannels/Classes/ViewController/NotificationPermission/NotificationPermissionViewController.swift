@@ -50,6 +50,9 @@ class NotificationPermissionViewController: UIViewController {
                     }
                     
                     if granted {
+                        let userDefaults = UserDefaults.standard
+                        userDefaults.set(true, forKey: "NotificationGranted")
+
                         self.moveToHomeVC()
                     } else {
                         self.showAlert(title: "Permission Denied", message: "You can enable notifications in Settings.")
