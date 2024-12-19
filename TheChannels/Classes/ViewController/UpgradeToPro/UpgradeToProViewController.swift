@@ -7,6 +7,54 @@
 
 import UIKit
 
+// MARK: - HeaderTitleCell
+
+class HeaderTitleCell: UITableViewCell {
+    
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var emojiImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        headerTitleLabel.text = "Unlock Everything"
+    }
+    
+}
+
+// MARK: - OﬀerCell
+
+class OﬀerCell: UITableViewCell {
+    
+    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var emojiImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+}
+
+// MARK: - LabelCell
+
+class LabelCell: UITableViewCell {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+}
+
+// MARK: - FeatureHeaderCell
+
+class FeatureHeaderCell: UITableViewCell {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+}
+
 // MARK: - FeatureListCell
 
 class FeatureListCell: UITableViewCell {
@@ -72,9 +120,6 @@ class UpgradeToProViewController: UIViewController {
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.showsHorizontalScrollIndicator = false
-        
-        tableView.reloadData()
     }
     
 
@@ -110,7 +155,24 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
             return UITableViewCell()
 
         } else if indexPath.row == 2 {
-            return UITableViewCell()
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FeatureHeaderCell", for: indexPath) as? FeatureHeaderCell {
+                return cell
+            }
+
+        } else if indexPath.row == 3 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath) as? LabelCell {
+                return cell
+            }
+
+        } else if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6  {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "OﬀerCell", for: indexPath) as? OﬀerCell {
+                return cell
+            }
+
+        } else if indexPath.row == 7 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTitleCell", for: indexPath) as? HeaderTitleCell {
+                return cell
+            }
 
         } else {
             return UITableViewCell()
@@ -118,4 +180,5 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
         }
         return UITableViewCell()
     }
+
 }
