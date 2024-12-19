@@ -11,8 +11,9 @@ import iOSDropDown
 
 class AddChannelViewController: UIViewController {
 
-    @IBOutlet weak var countryCodeDropDown: DropDown!
-    @IBOutlet weak var categoryDropDown: DropDown!
+    @IBOutlet weak var countryCodeiOSDropDown: DropDown!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var categoryiOSDropDown: DropDown!
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var addChannelBtn: UIButton!
     @IBOutlet weak var pictureImageView: UIImageView!
@@ -84,28 +85,28 @@ class AddChannelViewController: UIViewController {
             getCategories()
         }
         let categoryTitles = categories.compactMap { $0.title }
+                
+            categoryiOSDropDown.optionArray = categoryTitles
         
-        countryCodeDropDown.optionArray = ["Option 1", "Option 2", "Option 3"]
-        //Its Id Values and its optional
-        countryCodeDropDown.optionIds = [1,23,54,22]
+        countryCodeiOSDropDown.optionArray = countryCodes.map { "\($0["code"] ?? "")" }
 
-        // Image Array its optional
-//        countryCodeDropDown.ImageArray = [👩🏻‍🦳,🙊,🥞]
-        // The the Closure returns Selected Index and String
-        countryCodeDropDown.didSelect{(selectedText , index ,id) in
-//        self.valueLabel.text = "Selected String: \(selectedText) \n index: \(index)"
-        }//        countryCodes["code"]
+        countryCodeiOSDropDown.arrowSize = CGFloat(10)
+        countryCodeiOSDropDown.listHeight = 90
 
-//        categoryDropDown.optionArray = ["22","21"]
-//        categoryDropDown.arrowSize = CGFloat(10)
+            categoryiOSDropDown.arrowSize = CGFloat(10)
+        categoryiOSDropDown.listHeight = 120
+                
+        categoryiOSDropDown.didSelect { selectedText, index, id in
+            if let selectedCategory = self.categories.first(where: { $0.title == selectedText }) {
+                print("Selected Category ID: \(selectedCategory.category_id ?? "N/A")")
+                print("Selected Category Title: \(selectedCategory.title ?? "N/A")")
+                self.selectedCategory = selectedCategory
+            }
+        }
         
-//        categoryDropDown.didSelect { selectedText, index, id in
-//            if let selectedCategory = self.categories.first(where: { $0.title == selectedText }) {
-//                print("Selected Category ID: \(selectedCategory.category_id ?? "N/A")")
-//                print("Selected Category Title: \(selectedCategory.title ?? "N/A")")
-//                self.selectedCategory = selectedCategory
-//            }
-//        }
+        countryCodeiOSDropDown.didSelect { selectedText, index, id in
+            print(selectedText)
+        }
         
     }
     
