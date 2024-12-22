@@ -106,10 +106,7 @@ extension HomeViewController: UITextFieldDelegate {
     func performSearch(with query: String) {
         // Ensure query is not empty to prevent unnecessary API calls
         guard !query.isEmpty else { return }
-        
-        // Simulate API call (Replace with your API integration)
-        print("Searching for: \(query)")
-        
+                
         getSearchChannels(searchText: query, page: 1)
     }
 }
@@ -149,9 +146,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print(channels.count)
-        print(indexPath.row)
-        print(channels.count == indexPath.row + 2)
         if channels.count == indexPath.row + 2 && isContainMoreData {
             currentPage += 1
             getChannels(categoryId:  categories[selectedCategory ?? 0].category_id ?? "", page: currentPage)

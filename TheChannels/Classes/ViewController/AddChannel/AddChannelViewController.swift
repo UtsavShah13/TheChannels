@@ -17,8 +17,8 @@ class AddChannelViewController: UIViewController {
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var addChannelBtn: UIButton!
     @IBOutlet weak var pictureImageView: UIImageView!
-    @IBOutlet weak var chooseCoverImageView: UILabel!
-    @IBOutlet weak var uploadCoverImageView: UIImageView!
+    @IBOutlet weak var chooseCoverLabel: UILabel!
+//    @IBOutlet weak var uploadCoverImageView: UIImageView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
@@ -93,7 +93,7 @@ class AddChannelViewController: UIViewController {
         countryCodeiOSDropDown.arrowSize = CGFloat(10)
         countryCodeiOSDropDown.listHeight = 90
 
-            categoryiOSDropDown.arrowSize = CGFloat(10)
+        categoryiOSDropDown.arrowSize = CGFloat(10)
         categoryiOSDropDown.listHeight = 120
                 
         categoryiOSDropDown.didSelect { selectedText, index, id in
@@ -156,9 +156,9 @@ class AddChannelViewController: UIViewController {
         }))
         actionSheet.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: { [self] _ in
             if isFromCoverPhoto {
-                self.coverImageView.image = nil
-                uploadCoverImageView.isHidden = false
-                chooseCoverImageView.isHidden = false
+                self.coverImageView.image = UIImage(named: "iccnchoosebanner")
+//                uploadCoverImageView.isHidden = false
+                chooseCoverLabel.isHidden = false
             } else {
                 self.pictureImageView.image = nil
             }
@@ -201,8 +201,8 @@ extension AddChannelViewController: UIImagePickerControllerDelegate,UINavigation
         if isFromCoverPhoto {
             coverImageView.image = pickedImage
             coverImageData = pickedImage.pngData() ?? Data()
-            chooseCoverImageView.isHidden = true
-            uploadCoverImageView.isHidden = true
+            chooseCoverLabel.isHidden = true
+//            uploadCoverImageView.isHidden = true
         } else {
             pictureImageView.image = pickedImage
             imageData = pickedImage.pngData() ?? Data()

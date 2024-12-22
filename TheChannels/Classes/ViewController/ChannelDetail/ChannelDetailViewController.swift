@@ -29,21 +29,21 @@ class ChannelDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getChannelDetail(completion: { [self] in
-//            let images = ["icappstorelogo", "iccnpremiumbanner", "iccnpremiumbg"]
-            let imageSize: CGFloat = 45 // Size of each image
-             let overlapOffset: CGFloat = -10 // Negative for overlap
-             var previousImageView: UIImageView?
+            let imageSize: CGFloat = 45
+            let overlapOffset: CGFloat = -10
+            var previousImageView: UIImageView?
 
-             // A container view for all images
+            // A container view for all images
             let containerView = UIView()
-             containerView.translatesAutoresizingMaskIntoConstraints = false
-             profileImageView.addSubview(containerView)
-             
-             // Center the container view within profileImageView
-             NSLayoutConstraint.activate([
-                 containerView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
-                 containerView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor),
-             ])
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            profileImageView.addSubview(containerView)
+            
+            // Center the container view within profileImageView
+            NSLayoutConstraint.activate([
+                containerView.centerXAnchor.constraint(equalTo: profileImageView.centerXAnchor),
+                containerView.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor)
+            ])
+            
             if let images = channelFollowresImage {
                 for (index, imageName) in images.enumerated() {
                     let imageUrl = URL(string: imageName)
@@ -52,6 +52,8 @@ class ChannelDetailViewController: UIViewController {
                     imageView.translatesAutoresizingMaskIntoConstraints = false
                     imageView.contentMode = .scaleAspectFill
                     imageView.clipsToBounds = true
+                    imageView.layer.borderColor = UIColor.white.cgColor
+                    imageView.layer.borderWidth = 2
                     imageView.layer.cornerRadius = imageSize / 2
                     imageView.layer.zPosition = CGFloat(images.count - index) // First image on top
                     
@@ -64,6 +66,7 @@ class ChannelDetailViewController: UIViewController {
                     ])
                     
                     if let previous = previousImageView {
+                        // Position the current image relative to the previous image
                         NSLayoutConstraint.activate([
                             imageView.leadingAnchor.constraint(equalTo: previous.trailingAnchor, constant: overlapOffset)
                         ])
@@ -81,11 +84,23 @@ class ChannelDetailViewController: UIViewController {
                         dotsLabel.text = "●●●"
                         dotsLabel.textAlignment = .center
                         dotsLabel.textColor = UIColor.white.withAlphaComponent(0.7) // Opacity
-                        dotsLabel.font = UIFont.systemFont(ofSize: 12)
+                        dotsLabel.font = UIFont.systemFont(ofSize: 6)
                         
+                        let overlay = UIView()
+                        overlay.translatesAutoresizingMaskIntoConstraints = false
+                        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.6) // Adjust alpha for transparency
+                        overlay.layer.cornerRadius = imageSize / 2
+                        overlay.isUserInteractionEnabled = false // Ensure it doesn't block touch events
+                        
+                        imageView.addSubview(overlay)
                         imageView.addSubview(dotsLabel)
                         
                         NSLayoutConstraint.activate([
+                            overlay.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+                            overlay.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+                            overlay.topAnchor.constraint(equalTo: imageView.topAnchor),
+                            overlay.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+                            
                             dotsLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
                             dotsLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
                         ])
@@ -93,30 +108,28 @@ class ChannelDetailViewController: UIViewController {
                     
                     previousImageView = imageView
                 }
+                
                 // Adjust container view's width based on total images
-
                 let totalWidth = imageSize + CGFloat(images.count - 1) * (imageSize + overlapOffset)
                 NSLayoutConstraint.activate([
                     containerView.widthAnchor.constraint(equalToConstant: totalWidth),
                     containerView.heightAnchor.constraint(equalToConstant: imageSize)
                 ])
             }
-
         })
+
         fillData()
         setupUI()
     }
     
     func setupUI() {
-        
         reportChannelButton.layer.cornerRadius = 8
         addChannelButton.layer.cornerRadius = 8
-        
-        addShadow(view: detailView)
-        addShadow(view: shareView)
-        addShadow(view: forwardView)
-        addShadow(view: followView)
-        addShadow(view: groupActionView)
+        detailView.layer.cornerRadius = 8
+        shareView.layer.cornerRadius = 8
+        forwardView.layer.cornerRadius = 8
+        followView.layer.cornerRadius = 8
+        groupActionView.layer.cornerRadius = 8
     }
     
     func fillData() {
@@ -133,7 +146,6 @@ class ChannelDetailViewController: UIViewController {
         view.layer.shadowOpacity = 0.3                // Shadow transparency (0 to 1)
         view.layer.shadowOffset = CGSize(width: 1, height: 1) // Shadow offset
         view.layer.shadowRadius = 2
-        view.layer.cornerRadius = 8
     }
     
     func moveToAddChannel() {
@@ -145,7 +157,6 @@ class ChannelDetailViewController: UIViewController {
     
     func shareLink(_ urlString: String, from viewController: UIViewController) {
         guard let url = URL(string: urlString) else {
-            print("Invalid URL")
             return
         }
         

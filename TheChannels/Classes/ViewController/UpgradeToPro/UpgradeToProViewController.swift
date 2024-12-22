@@ -7,6 +7,62 @@
 
 import UIKit
 
+enum PriceType: String, CaseIterable {
+    case week = "Week"
+    case month = "Month"
+    case yearl = "Yearl"
+}
+
+// MARK: - FAQCell
+
+class FAQCell: UITableViewCell {
+    
+    @IBOutlet weak var arrowImage: UIImageView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var answerLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+}
+
+// MARK: - StoreReviewCell
+
+class StoreReviewCell: UITableViewCell {
+    
+    @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var storeReviewTitle: UILabel!
+    @IBOutlet weak var storeReviewDescLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        mainView.layer.cornerRadius = 8
+    }
+    
+}
+
+// MARK: - PriceCell
+
+class PriceCell: UITableViewCell {
+    
+    @IBOutlet weak var freeTrialView: UIView!
+    @IBOutlet weak var saveLabel: UILabel!
+    @IBOutlet weak var amountPerWeekLabel: UILabel!
+    @IBOutlet weak var amountPerType: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var mainView: UIView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        mainView.layer.cornerRadius = 8
+        freeTrialView.layer.cornerRadius = 8
+        freeTrialView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner]
+
+    }
+    
+}
+
 // MARK: - HeaderTitleCell
 
 class HeaderTitleCell: UITableViewCell {
@@ -28,9 +84,11 @@ class OﬀerCell: UITableViewCell {
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var emojiImageView: UIImageView!
+    @IBOutlet weak var mainView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        mainView.layer.cornerRadius = 8 
     }
     
 }
@@ -72,9 +130,9 @@ class FeatureListCell: UITableViewCell {
         collectionView.register(cell: Cell.onboardingCell)
         
         let layout = UICollectionViewFlowLayout()
-               layout.scrollDirection = .horizontal // For horizontal scrolling
-               layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height) // Full screen size
-               layout.minimumLineSpacing = 0 // No spacing between cells
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        layout.minimumLineSpacing = 0
             
         collectionView.collectionViewLayout = layout
         collectionView.isPagingEnabled = true // Enable paging
@@ -85,13 +143,20 @@ class FeatureListCell: UITableViewCell {
         pageController.numberOfPages = 4
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Calculate the current page
+        let pageWidth = scrollView.bounds.width
+        let currentPage = Int((scrollView.contentOffset.x + pageWidth / 2) / pageWidth)
+        pageController.currentPage = currentPage
+    }
+    
 }
 
 //    MARK: - FeatureListCell:  UICollectionViewDelegate, UICollectionViewDataSource
 
 extension FeatureListCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4 // intoImages.count
+        return 4 // introImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,23 +170,35 @@ extension FeatureListCell: UICollectionViewDelegate, UICollectionViewDataSource,
 
 class UpgradeToProViewController: UIViewController {
 
+    @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    var offerCellTitle: [String] = ["Special trial Price", "Easy cancle during trial", "Just try it out"]
+    var offerCellSubTitle: [String] = ["it's actuall 20% off discounted price.", "You can cancle any time from the App Store", "For 1-month and the make up your mind."]
+    var priceType = PriceType.allCases
+    var selectedIndex: Int? = 0
+    var faqs: [FAQsModel] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupUI()
+        faqs = getFAQList()
+        tableView.reloadData()
     }
     
     func setupUI() {
         continueButton.layer.cornerRadius = 8
+        bottomView.layer.cornerRadius = 25
+        bottomView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
     }
-    
 
 //    MARK: - Button Action
     
@@ -137,12 +214,14 @@ class UpgradeToProViewController: UIViewController {
     }
     @IBAction func continueAction(_ sender: UIButton) {
     }
+    
 }
 
 // MARK: - UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
+
 extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 18
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -166,6 +245,9 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
 
         } else if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6  {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "OﬀerCell", for: indexPath) as? OﬀerCell {
+                let currentIndex = indexPath.row - 4
+                cell.titleLabel.text = offerCellTitle[currentIndex]
+                cell.descLabel.text = offerCellSubTitle[currentIndex]
                 return cell
             }
 
@@ -174,11 +256,79 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
                 return cell
             }
 
+        } else if indexPath.row == 8 || indexPath.row == 9 || indexPath.row == 10  {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "PriceCell", for: indexPath) as? PriceCell {
+                let currentIndex = indexPath.row - 8
+                
+                if currentIndex == 0 {
+                    cell.freeTrialView.isHidden = false
+                } else {
+                    cell.freeTrialView.isHidden = true
+                }
+                
+                cell.amountPerType.text = "Hey"
+                
+                if selectedIndex == indexPath.row {
+                    cell.mainView.layer.borderColor = UIColor.blue.cgColor
+                    cell.mainView.layer.borderWidth = 1
+                    cell.mainView.backgroundColor = UIColor(red: 228/255, green: 239/255, blue: 253/255, alpha: 1) // .yellow
+                } else {
+                    cell.mainView.layer.borderWidth = 0
+                    cell.mainView.backgroundColor = .white
+                }
+                
+                cell.typeLabel.text = priceType[currentIndex].rawValue
+                return cell
+            }
+        } else if indexPath.row == 11 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTitleCell", for: indexPath) as? HeaderTitleCell {
+                cell.headerTitleLabel.text = "What Our Users Says :"
+                return cell
+            }
+
+        } else if indexPath.row == 12 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "StoreReviewCell", for: indexPath) as? StoreReviewCell {
+                cell.storeReviewTitle.text = "Quick Messages are soo helpful!"
+                cell.storeReviewDescLabel.text = "I use them for most replies to all my clients! Saving me tons of time. Plus, they're super easy to create, Love it!"
+                return cell
+            }
+        } else if indexPath.row == 13 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTitleCell", for: indexPath) as? HeaderTitleCell {
+                cell.headerTitleLabel.text = "FAQs"
+                return cell
+            }
+
+        } else if indexPath.row == 14 || indexPath.row == 15 || indexPath.row == 16 || indexPath.row == 17 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "FAQCell", for: indexPath) as? FAQCell {
+                let currentIndex = indexPath.row - 14
+                cell.questionLabel.text = faqs[currentIndex].question
+                if faqs[currentIndex].isOpen {
+                    cell.answerLabel.text = faqs[currentIndex].answer
+                    cell.answerLabel.isHidden = false
+                    cell.arrowImage.image = UIImage(named   : "iccndropdownup")
+                    } else {
+                    cell.arrowImage.image = UIImage(named: "iccndropdown")
+                    cell.answerLabel.isHidden = true
+                }
+                return cell
+            }
         } else {
             return UITableViewCell()
-
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        
+        // FAQ 
+        if (14...17).contains(selectedIndex ?? 0) {
+            let number = (selectedIndex ?? 0) - 14
+            faqs[number].isOpen = !faqs[number].isOpen
+        } else {
+
+        }
+        tableView.reloadData()
     }
 
 }
