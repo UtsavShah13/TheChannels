@@ -65,6 +65,14 @@ class AddChannelViewController: UIViewController {
         ["country": "Egypt", "code": "+20"]
     ]
     
+    let placeholderLabel: UILabel = {
+          let label = UILabel()
+          label.text = "Description"
+          label.font = UIFont.systemFont(ofSize: 16)
+          label.textColor = UIColor.lightGray
+          return label
+      }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -78,8 +86,16 @@ class AddChannelViewController: UIViewController {
         } else {
             descriptionTextView.borderColor = .systemGray
         }
+        descriptionTextView.layer.cornerRadius = 8
+        
         descriptionTextView.borderWidth = 1
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
+        
+        // Add the placeholder label to the textView
+        placeholderLabel.frame = CGRect(x: 5, y: 8, width: descriptionTextView.frame.width - 10, height: 20)
+        descriptionTextView.addSubview(placeholderLabel)
+        descriptionTextView.delegate = self
+
         
         if categories.isEmpty {
             getCategories()
@@ -188,6 +204,13 @@ class AddChannelViewController: UIViewController {
     @IBAction func uploadCoverImageViewAction(_ sender: UIButton) {
         isFromCoverPhoto = true
         openGallaryAlert(sender)
+    }
+}
+
+extension AddChannelViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }
 

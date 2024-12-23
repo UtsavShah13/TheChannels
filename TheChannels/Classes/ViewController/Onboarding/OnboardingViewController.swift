@@ -9,16 +9,19 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var onboardingPageControl: UIPageControl!
     @IBOutlet weak var onboardingCollectionView: UICollectionView!
     
     @IBOutlet weak var nextButton: UIButton!
     
     var currentIndex = 0
+    var onboardingDetails: [[String : Any]]?
     var intoImages = ["icintro_0", "icintro_1", "icintro_2"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        onboardingDetails = getIntroTitles()
         setupCollectionView()
         setupUI()
     }
@@ -26,6 +29,8 @@ class OnboardingViewController: UIViewController {
     func setupUI() {
         nextButton.layer.cornerRadius = 8
         onboardingPageControl.numberOfPages = intoImages.count
+        let title = onboardingDetails?[currentIndex]["title"] as? String
+        titleLabel.text = title
     }
     
     func setupCollectionView() {
@@ -61,6 +66,8 @@ class OnboardingViewController: UIViewController {
             onboardingCollectionView.scrollToItem(at: IndexPath(item: currentIndex + 1, section: 0), at: .left, animated: false)
             currentIndex += 1
             onboardingPageControl.currentPage = currentIndex
+            let title = onboardingDetails?[currentIndex]["title"] as? String
+            titleLabel.text = title
         } else {
             moveToNotificationVC()
         }
@@ -71,12 +78,13 @@ class OnboardingViewController: UIViewController {
 
 extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return intoImages.count
+        return onboardingDetails?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.onboardingCell, for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
-        cell.imageView.image = UIImage(named: intoImages[indexPath.item])
+        let imageName = onboardingDetails?[indexPath.item]["image"] as? String ?? ""
+        cell.imageView.image = UIImage(named: imageName)
         return cell
     }
 }

@@ -13,6 +13,7 @@ enum PriceType: String, CaseIterable {
     case yearl = "Yearl"
 }
 
+
 // MARK: - FAQCell
 
 class FAQCell: UITableViewCell {
@@ -46,6 +47,7 @@ class StoreReviewCell: UITableViewCell {
 
 class PriceCell: UITableViewCell {
     
+    @IBOutlet weak var freeTrialText: UILabel!
     @IBOutlet weak var freeTrialView: UIView!
     @IBOutlet weak var saveLabel: UILabel!
     @IBOutlet weak var amountPerWeekLabel: UILabel!
@@ -72,7 +74,6 @@ class HeaderTitleCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        headerTitleLabel.text = "Unlock Everything"
     }
     
 }
@@ -81,9 +82,9 @@ class HeaderTitleCell: UITableViewCell {
 
 class OﬀerCell: UITableViewCell {
     
+    @IBOutlet weak var emojiLabel: UILabel!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var emojiImageView: UIImageView!
     @IBOutlet weak var mainView: UIView!
     
     override func awakeFromNib() {
@@ -174,9 +175,10 @@ class UpgradeToProViewController: UIViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var offerCellTitle: [String] = ["Special trial Price", "Easy cancle during trial", "Just try it out"]
+    var inAppOffers: [[String: Any]]?
     var offerCellSubTitle: [String] = ["it's actuall 20% off discounted price.", "You can cancle any time from the App Store", "For 1-month and the make up your mind."]
     var priceType = PriceType.allCases
+    var inAppProducts: [[String: Any]]?
     var selectedIndex: Int? = 0
     var faqs: [FAQsModel] = []
     
@@ -184,7 +186,13 @@ class UpgradeToProViewController: UIViewController {
         super.viewDidLoad()
         setupTableView()
         setupUI()
+        getdata()
+    }
+    
+    func getdata() {
+        inAppOffers = getInAppOffers()
         faqs = getFAQList()
+        inAppProducts = getInAppProducts()
         tableView.reloadData()
     }
     
@@ -207,11 +215,16 @@ class UpgradeToProViewController: UIViewController {
     }
     
     @IBAction func termsAction(_ sender: UIButton) {
+        openURL(link: AppConfigs.kAppTermsURL)
     }
+    
     @IBAction func restoreAction(_ sender: UIButton) {
     }
+    
     @IBAction func privacyAction(_ sender: UIButton) {
+        openURL(link: AppConfigs.kAppPrivacyPolicyURL)
     }
+    
     @IBAction func continueAction(_ sender: UIButton) {
     }
     
@@ -246,13 +259,20 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
         } else if indexPath.row == 4 || indexPath.row == 5 || indexPath.row == 6  {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "OﬀerCell", for: indexPath) as? OﬀerCell {
                 let currentIndex = indexPath.row - 4
-                cell.titleLabel.text = offerCellTitle[currentIndex]
-                cell.descLabel.text = offerCellSubTitle[currentIndex]
+                let title = inAppOffers?[currentIndex]["title"] as? String
+                let subTitle = inAppOffers?[currentIndex]["subtitle"] as? String
+                let emojiLabel = inAppOffers?[currentIndex]["emoji"] as? String
+
+                cell.titleLabel.text = title
+                cell.descLabel.text = subTitle
+                cell.emojiLabel.text = emojiLabel
+
                 return cell
             }
 
         } else if indexPath.row == 7 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderTitleCell", for: indexPath) as? HeaderTitleCell {
+                cell.headerTitleLabel.text = "Unlock Everything"
                 return cell
             }
 
@@ -260,13 +280,28 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
             if let cell = tableView.dequeueReusableCell(withIdentifier: "PriceCell", for: indexPath) as? PriceCell {
                 let currentIndex = indexPath.row - 8
                 
-                if currentIndex == 0 {
+                let duraction = inAppProducts?[currentIndex]["duration"] as? String
+                let weekprice = inAppProducts?[currentIndex]["weekprice"] as? String
+                let price = inAppProducts?[currentIndex]["price"] as? String
+                let discount = inAppProducts?[currentIndex]["discount"] as? String
+                let bannerbadge = inAppProducts?[currentIndex]["bannerbadge"] as? String
+                
+                if bannerbadge != "" {
                     cell.freeTrialView.isHidden = false
+                    cell.freeTrialText.text = bannerbadge
                 } else {
                     cell.freeTrialView.isHidden = true
                 }
+                if bannerbadge != "" {
+                    cell.saveLabel.isHidden = false
+                    cell.saveLabel.text = discount
+                } else {
+                    cell.saveLabel.isHidden = true
+                }
                 
-                cell.amountPerType.text = "Hey"
+                cell.typeLabel.text = duraction
+                cell.amountPerType.text = price
+                cell.amountPerWeekLabel.text = weekprice
                 
                 if selectedIndex == indexPath.row {
                     cell.mainView.layer.borderColor = UIColor.blue.cgColor
@@ -277,7 +312,6 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
                     cell.mainView.backgroundColor = .white
                 }
                 
-                cell.typeLabel.text = priceType[currentIndex].rawValue
                 return cell
             }
         } else if indexPath.row == 11 {
@@ -321,13 +355,19 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
         
-        // FAQ 
-        if (14...17).contains(selectedIndex ?? 0) {
+        if (14...17).contains(selectedIndex ?? 0) { // FAQ
             let number = (selectedIndex ?? 0) - 14
             faqs[number].isOpen = !faqs[number].isOpen
+        } else if (8...10).contains(selectedIndex ?? 0) { //        PriceCell
+            if selectedIndex == 8 {
+                continueButton.setTitle("Tryit Free", for: .normal)
+            } else {
+                continueButton.setTitle("Continue", for: .normal)
+            }
         } else {
 
         }
+        
         tableView.reloadData()
     }
 
