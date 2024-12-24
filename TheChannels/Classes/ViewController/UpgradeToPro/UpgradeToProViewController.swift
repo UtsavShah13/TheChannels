@@ -14,6 +14,34 @@ enum PriceType: String, CaseIterable {
 }
 
 
+// MARK: - StoreReviewCollectionCell
+
+class StoreReviewCollectionCell: UICollectionViewCell {
+    
+    @IBOutlet weak var storeReviewDescLabel: UILabel!
+    @IBOutlet weak var storeReviewTitle: UILabel!
+        
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+}
+
+// MARK: - FeatureListCollectionCell
+
+class FeatureListCollectionCell: UICollectionViewCell {
+    
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
+    @IBOutlet weak var bgImageView: UIImageView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+}
+
+
 // MARK: - FAQCell
 
 class FAQCell: UITableViewCell {
@@ -32,15 +60,56 @@ class FAQCell: UITableViewCell {
 
 class StoreReviewCell: UITableViewCell {
     
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var storeReviewTitle: UILabel!
-    @IBOutlet weak var storeReviewDescLabel: UILabel!
+    @IBOutlet weak var storeReviewCollectionView: UICollectionView!
     
+    var inAppReviews: [[String : String]]?
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        mainView.layer.cornerRadius = 8
+        setupCollectionView()
+        inAppReviews = getInAppReviews()
     }
     
+    func setupCollectionView() {
+        storeReviewCollectionView.delegate = self
+        storeReviewCollectionView.dataSource = self
+        storeReviewCollectionView.register(cell: Cell.onboardingCell)
+        storeReviewCollectionView.layer.cornerRadius = 8
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.minimumLineSpacing = 0
+            
+        storeReviewCollectionView.collectionViewLayout = layout
+        storeReviewCollectionView.isPagingEnabled = true // Enable paging
+        storeReviewCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        storeReviewCollectionView.showsHorizontalScrollIndicator = false
+    }
+    
+}
+
+//    MARK: - StoreReviewCell:  UICollectionViewDelegate, UICollectionViewDataSource
+
+extension StoreReviewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return inAppReviews?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StoreReviewCollectionCell", for: indexPath) as? StoreReviewCollectionCell else { return UICollectionViewCell() }
+        
+        let title = inAppReviews?[indexPath.item]["title"] as? String ?? ""
+        let subTitle = inAppReviews?[indexPath.item]["subtitle"] as? String ?? ""
+                
+        cell.storeReviewTitle.text = title
+        cell.storeReviewDescLabel.text = subTitle
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width - 24
+        return CGSize(width: width, height: 120)
+    }
 }
 
 // MARK: - PriceCell
@@ -60,7 +129,6 @@ class PriceCell: UITableViewCell {
         mainView.layer.cornerRadius = 8
         freeTrialView.layer.cornerRadius = 8
         freeTrialView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner]
-
     }
     
 }
@@ -114,14 +182,28 @@ class FeatureHeaderCell: UITableViewCell {
     
 }
 
+// MARK: - AwardsCell
+
+class AwardsCell: UITableViewCell {
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+}
+
 // MARK: - FeatureListCell
 
 class FeatureListCell: UITableViewCell {
     
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var inAppFeatureList: [[String: Any]]?
+
     override func awakeFromNib() {
         super.awakeFromNib()
+        inAppFeatureList = getInAppFeatureList()
         setupCollectionView()
     }
     
@@ -129,10 +211,10 @@ class FeatureListCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cell: Cell.onboardingCell)
+        collectionView.layer.cornerRadius = 8
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         layout.minimumLineSpacing = 0
             
         collectionView.collectionViewLayout = layout
@@ -146,7 +228,7 @@ class FeatureListCell: UITableViewCell {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Calculate the current page
-        let pageWidth = scrollView.bounds.width
+        let pageWidth = scrollView.bounds.width - 24
         let currentPage = Int((scrollView.contentOffset.x + pageWidth / 2) / pageWidth)
         pageController.currentPage = currentPage
     }
@@ -157,13 +239,28 @@ class FeatureListCell: UITableViewCell {
 
 extension FeatureListCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4 // introImages.count
+        return inAppFeatureList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.onboardingCell, for: indexPath) as? OnboardingCollectionViewCell else { return UICollectionViewCell() }
-        cell.imageView.image = UIImage(named: "iccnpremiumbanner")
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureListCollectionCell", for: indexPath) as? FeatureListCollectionCell else { return UICollectionViewCell() }
+        
+        let bgImage = inAppFeatureList?[indexPath.item]["backgroundimage"] as? String ?? ""
+        let logoImage = inAppFeatureList?[indexPath.item]["image"] as? String ?? ""
+        let title = inAppFeatureList?[indexPath.item]["title"] as? String ?? ""
+        let subTitle = inAppFeatureList?[indexPath.item]["subtitle"] as? String ?? ""
+        
+        cell.bgImageView.image = UIImage(named: bgImage)
+        cell.logoImageView.image = UIImage(named: logoImage)
+        cell.titleLabel.text = title
+        cell.subTitleLabel.text = subTitle
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = UIScreen.main.bounds.width - 24
+        return CGSize(width: width, height: 145)
     }
 }
 
@@ -180,6 +277,7 @@ class UpgradeToProViewController: UIViewController {
     var priceType = PriceType.allCases
     var inAppProducts: [[String: Any]]?
     var selectedIndex: Int? = 0
+    var selectedPrice: Int? = 9
     var faqs: [FAQsModel] = []
     
     override func viewDidLoad() {
@@ -244,8 +342,10 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
             }
 
         } else if indexPath.row == 1 {
-            return UITableViewCell()
-
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "AwardsCell", for: indexPath) as? AwardsCell {
+                return cell
+            }
+            
         } else if indexPath.row == 2 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FeatureHeaderCell", for: indexPath) as? FeatureHeaderCell {
                 return cell
@@ -303,10 +403,10 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
                 cell.amountPerType.text = price
                 cell.amountPerWeekLabel.text = weekprice
                 
-                if selectedIndex == indexPath.row {
+                if selectedPrice == indexPath.row {
                     cell.mainView.layer.borderColor = UIColor.blue.cgColor
                     cell.mainView.layer.borderWidth = 1
-                    cell.mainView.backgroundColor = UIColor(red: 228/255, green: 239/255, blue: 253/255, alpha: 1) // .yellow
+                    cell.mainView.backgroundColor = UIColor(red: 228/255, green: 239/255, blue: 253/255, alpha: 1)
                 } else {
                     cell.mainView.layer.borderWidth = 0
                     cell.mainView.backgroundColor = .white
@@ -322,8 +422,7 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
 
         } else if indexPath.row == 12 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "StoreReviewCell", for: indexPath) as? StoreReviewCell {
-                cell.storeReviewTitle.text = "Quick Messages are soo helpful!"
-                cell.storeReviewDescLabel.text = "I use them for most replies to all my clients! Saving me tons of time. Plus, they're super easy to create, Love it!"
+ 
                 return cell
             }
         } else if indexPath.row == 13 {
@@ -354,13 +453,15 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
-        
+
         if (14...17).contains(selectedIndex ?? 0) { // FAQ
             let number = (selectedIndex ?? 0) - 14
             faqs[number].isOpen = !faqs[number].isOpen
-        } else if (8...10).contains(selectedIndex ?? 0) { //        PriceCell
+        } else if (8...10).contains(indexPath.row) { //        PriceCell
+            selectedPrice = selectedIndex
+
             if selectedIndex == 8 {
-                continueButton.setTitle("Tryit Free", for: .normal)
+                continueButton.setTitle("Try it Free", for: .normal)
             } else {
                 continueButton.setTitle("Continue", for: .normal)
             }

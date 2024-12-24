@@ -92,7 +92,7 @@ class AddChannelViewController: UIViewController {
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
         
         // Add the placeholder label to the textView
-        placeholderLabel.frame = CGRect(x: 5, y: 8, width: descriptionTextView.frame.width - 10, height: 20)
+        placeholderLabel.frame = CGRect(x: 8, y: 8, width: descriptionTextView.frame.width - 10, height: 20)
         descriptionTextView.addSubview(placeholderLabel)
         descriptionTextView.delegate = self
 

@@ -50,15 +50,16 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     @IBOutlet weak var appCollectionView: UICollectionView!
     @IBOutlet weak var selectedAppLabel: UILabel!
     @IBOutlet weak var installButton: UIButton!
-    var getMoreApps: [[String : String]] = []
+    
+    var moreApps: [[String : String]] = []
     var currentSelectedApp: [String : String] = [:]
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        getMoreApps = MoreApps.getMoreApps()
-        getMoreApps.append([:])
-        getMoreApps.insert([:], at: 0)
+        moreApps = getMoreApps()
+        moreApps.append([:])
+        moreApps.insert([:], at: 0)
         appCollectionView.reloadData()
         DispatchQueue.main.async {
              let indexPath = IndexPath(item: 2, section: 0)
@@ -98,7 +99,7 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
 
         // Find the indexPath of the cell at the center point
         if let indexPath = appCollectionView.indexPathForItem(at: centerPoint) {
-            currentSelectedApp = getMoreApps[indexPath.row]
+            currentSelectedApp = moreApps[indexPath.row]
             if let appName = currentSelectedApp["apptitle"] {
                 selectedAppLabel.text = appName
             } else {
@@ -120,12 +121,12 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return getMoreApps.count
+        return moreApps.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MoreAppCollectionCell", for: indexPath) as? MoreAppCollectionCell {
-            let imageUrl = URL(string: getMoreApps[indexPath.row]["appimage"] ?? "")
+            let imageUrl = URL(string: moreApps[indexPath.row]["appimage"] ?? "")
             cell.appImageView.sd_setImage(with: imageUrl)
             return cell
         }
