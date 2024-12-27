@@ -22,8 +22,8 @@
                         <rect key="frame" x="3" y="0.0" width="166" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsU-mD-W5D">
-                                <rect key="frame" x="8" y="8" width="150" height="34"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <rect key="frame" x="8" y="6" width="150" height="38"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -31,9 +31,9 @@
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vsU-mD-W5D" secondAttribute="trailing" constant="8" id="7EL-nW-XDQ"/>
-                            <constraint firstItem="vsU-mD-W5D" firstAttribute="top" secondItem="nHq-by-ukv" secondAttribute="top" constant="8" id="c8j-A5-TL0"/>
+                            <constraint firstItem="vsU-mD-W5D" firstAttribute="top" secondItem="nHq-by-ukv" secondAttribute="top" constant="6" id="c8j-A5-TL0"/>
                             <constraint firstItem="vsU-mD-W5D" firstAttribute="leading" secondItem="nHq-by-ukv" secondAttribute="leading" constant="8" id="lzk-yK-54Z"/>
-                            <constraint firstAttribute="bottom" secondItem="vsU-mD-W5D" secondAttribute="bottom" constant="8" id="vvF-jo-yiH"/>
+                            <constraint firstAttribute="bottom" secondItem="vsU-mD-W5D" secondAttribute="bottom" constant="6" id="vvF-jo-yiH"/>
                         </constraints>
                     </view>
                 </subviews>

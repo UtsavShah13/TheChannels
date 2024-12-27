@@ -120,21 +120,25 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.channelsCell, for: indexPath) as? ChannelsTableViewCell else { return UITableViewCell() }
-        cell.nameLabel.text = channels[indexPath.row].title
-        cell.followersLabel.text = channels[indexPath.row].title
+        
+        //        cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
+                cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
+                cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
+
         if channels[indexPath.row].is_verified == "0" {
             cell.varifiedImageView.isHidden = true
         } else {
             cell.varifiedImageView.isHidden = false
         }
         cell.followersLabel.text = channels[indexPath.row].subscribersf
-        cell.followButton.tintColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
-        cell.followButton.titleLabel?.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
-        cell.followButton.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
         let imageUrl = URL(string: channels[indexPath.row].pic_thumb ?? "")
         if imageUrl != nil {
             cell.categoryImageView?.sd_setImage(with: imageUrl)
         }
+        
+        cell.nameLabel.text = channels[indexPath.row].title
+        cell.followersLabel.text = channels[indexPath.row].title
+
         cell.handleFollowButton = { [self] in
             followChannel(channelId: channels[indexPath.row].channel_id ?? "")
         }
@@ -146,7 +150,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if channels.count == indexPath.row + 2 && isContainMoreData {
+        if channels.count == indexPath.row + 1 && isContainMoreData {
             currentPage += 1
             getChannels(categoryId:  categories[selectedCategory ?? 0].category_id ?? "", page: currentPage)
         }
@@ -163,7 +167,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.categoriesCell, for: indexPath) as? CategoriesCollectionViewCell else { return UICollectionViewCell() }
-        cell.categoryLabel.text = categories[indexPath.item].title
         if indexPath.item == selectedCategory {
             cell.categoryLabel.textColor = UIColor.colorFromHex("3E6F56", alpha: 1)
             cell.mainView.backgroundColor = UIColor.colorFromHex("DFFCD6", alpha: 1)
@@ -171,6 +174,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.categoryLabel.textColor = UIColor.colorFromHex("797B7C", alpha: 1)
             cell.mainView.backgroundColor = UIColor.colorFromHex("E4E4E6", alpha: 1)
         }
+        cell.categoryLabel.text = categories[indexPath.item].title
         return cell
     }
     
@@ -193,10 +197,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let text = categories[indexPath.item].title
         
         // Calculate the text width
-        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 17)]).width
+        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 16)]).width
         
         // Add padding
-        return CGSize(width: (textWidth ?? 0) + 32, height: 45)
+        return CGSize(width: (textWidth ?? 0) + 32, height: 43)
     }
 
 }

@@ -8,9 +8,9 @@
 import UIKit
 import iOSDropDown
 
-
 class AddChannelViewController: UIViewController {
 
+    @IBOutlet weak var numberView: UIView!
     @IBOutlet weak var countryCodeiOSDropDown: DropDown!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var categoryiOSDropDown: DropDown!
@@ -18,7 +18,6 @@ class AddChannelViewController: UIViewController {
     @IBOutlet weak var addChannelBtn: UIButton!
     @IBOutlet weak var pictureImageView: UIImageView!
     @IBOutlet weak var chooseCoverLabel: UILabel!
-//    @IBOutlet weak var uploadCoverImageView: UIImageView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
@@ -86,7 +85,21 @@ class AddChannelViewController: UIViewController {
         } else {
             descriptionTextView.borderColor = .systemGray
         }
+        
         descriptionTextView.layer.cornerRadius = 8
+        numberView.layer.cornerRadius = 8
+        numberView.layer.borderWidth = 1
+        
+        if #available(iOS 13.0, *) {
+            numberView.borderColor = .systemGray5
+        } else {
+            numberView.borderColor = .systemGray
+        }
+        
+        roundedTextFields(textField: titleTextField)
+        roundedTextFields(textField: linkTextField)
+        roundedTextFields(textField: categoryiOSDropDown)
+        roundedTextFields(textField: dateTextField)
         
         descriptionTextView.borderWidth = 1
         pictureImageView.layer.cornerRadius = pictureImageView.frame.height / 2
@@ -110,8 +123,10 @@ class AddChannelViewController: UIViewController {
         countryCodeiOSDropDown.listHeight = 90
 
         categoryiOSDropDown.arrowSize = CGFloat(10)
-        categoryiOSDropDown.listHeight = 120
-                
+        categoryiOSDropDown.listHeight = 150
+        categoryiOSDropDown.selectedRowColor = .systemGray
+        categoryiOSDropDown.tintColor = UIColor.systemGreen
+        categoryiOSDropDown.checkMarkEnabled = false
         categoryiOSDropDown.didSelect { selectedText, index, id in
             if let selectedCategory = self.categories.first(where: { $0.title == selectedText }) {
                 print("Selected Category ID: \(selectedCategory.category_id ?? "N/A")")
@@ -124,6 +139,10 @@ class AddChannelViewController: UIViewController {
             print(selectedText)
         }
         
+    }
+    
+    func roundedTextFields(textField: UITextField) {
+        textField.layer.cornerRadius = 8
     }
     
     private func setupDatePicker() {
