@@ -69,13 +69,13 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     }
     
     func setup() {
-        installButton.layer.cornerRadius = 8
+        installButton.layer.cornerRadius = installButton.frame.height / 2
         appCollectionView.delegate = self
         appCollectionView.dataSource = self
         
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 80, height: 80)
-        layout.minimumLineSpacing = 30  // Vertical spacing between rows
+        layout.itemSize = CGSize(width: 75, height: 75)
+        layout.minimumLineSpacing = 40  // Vertical spacing between rows
 //        layout.minimumInteritemSpacing = 25 // Horizontal spacing between cells
         layout.scrollDirection = .horizontal
         appCollectionView.showsHorizontalScrollIndicator = false
@@ -135,7 +135,7 @@ class MoreAppCell: UITableViewCell, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: 80, height: 80)
+           return CGSize(width: 75, height: 75)
     }
 }
 
@@ -258,7 +258,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             moveToUpgradeVC()
@@ -275,7 +274,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 0
         } else {
-            return 40
+            return 35
         }
     }
     
@@ -288,14 +287,20 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         let label = UILabel()
         label.text = settingHeaders[section]
         label.textColor = .lightGray
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
 
         headerView.addSubview(label)
 
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 0), // Adjust the constant for exact alignment
-            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
+            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 0),
+
+            label.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 8),
+
+            label.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 0),
+
+            label.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: 0),
+
         ])
 
         return headerView
@@ -304,5 +309,12 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerView = UIView()
+//        footerView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//        return footerView
+//
+//    }
     
 }
