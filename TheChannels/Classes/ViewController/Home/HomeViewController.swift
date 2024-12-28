@@ -197,10 +197,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let text = categories[indexPath.item].title
         
         // Calculate the text width
-        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 16)]).width
+        let textWidth = text?.size(withAttributes: [.font: UIFont.boldSystemFont(ofSize: 15)]).width
         
         // Add padding
-        return CGSize(width: (textWidth ?? 0) + 32, height: 43)
+        return CGSize(width: (textWidth ?? 0) + 32, height: 40)
     }
 
 }

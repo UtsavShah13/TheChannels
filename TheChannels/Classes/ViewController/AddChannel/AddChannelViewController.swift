@@ -146,7 +146,7 @@ class AddChannelViewController: UIViewController {
     }
     
     private func setupDatePicker() {
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .dateAndTime
         
         if #available(iOS 14.0, *) {
             datePicker.preferredDatePickerStyle = .wheels
@@ -192,7 +192,6 @@ class AddChannelViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Remove Image", style: .default, handler: { [self] _ in
             if isFromCoverPhoto {
                 self.coverImageView.image = UIImage(named: "iccnchoosebanner")
-//                uploadCoverImageView.isHidden = false
                 chooseCoverLabel.isHidden = false
             } else {
                 self.pictureImageView.image = nil
@@ -244,7 +243,6 @@ extension AddChannelViewController: UIImagePickerControllerDelegate,UINavigation
             coverImageView.image = pickedImage
             coverImageData = pickedImage.pngData() ?? Data()
             chooseCoverLabel.isHidden = true
-//            uploadCoverImageView.isHidden = true
         } else {
             pictureImageView.image = pickedImage
             imageData = pickedImage.pngData() ?? Data()

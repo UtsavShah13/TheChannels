@@ -14,7 +14,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        mainView.layer.cornerRadius = mainView.frame.height / 2.0
+        mainView.layer.cornerRadius = mainView.frame.height / 2.5
     }
 
 }

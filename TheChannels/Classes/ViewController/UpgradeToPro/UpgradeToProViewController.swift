@@ -211,7 +211,7 @@ class FeatureListCell: UITableViewCell {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(cell: Cell.onboardingCell)
-        collectionView.layer.cornerRadius = 8
+        collectionView.layer.cornerRadius = 21
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -228,7 +228,7 @@ class FeatureListCell: UITableViewCell {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // Calculate the current page
-        let pageWidth = scrollView.bounds.width - 24
+        let pageWidth = scrollView.bounds.width - 40
         let currentPage = Int((scrollView.contentOffset.x + pageWidth / 2) / pageWidth)
         pageController.currentPage = currentPage
     }
@@ -259,7 +259,7 @@ extension FeatureListCell: UICollectionViewDelegate, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width - 24
+        let width = UIScreen.main.bounds.width - 40
         return CGSize(width: width, height: 145)
     }
 }
@@ -392,7 +392,8 @@ extension UpgradeToProViewController: UITableViewDelegate, UITableViewDataSource
                 } else {
                     cell.freeTrialView.isHidden = true
                 }
-                if bannerbadge != "" {
+                
+                if discount != "" {
                     cell.saveLabel.isHidden = false
                     cell.saveLabel.text = discount
                 } else {

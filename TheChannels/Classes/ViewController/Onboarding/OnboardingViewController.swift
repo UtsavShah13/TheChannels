@@ -6,13 +6,15 @@
 //
 
 import UIKit
+import CHIPageControl
 
 class OnboardingViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var onboardingPageControl: UIPageControl!
     @IBOutlet weak var onboardingCollectionView: UICollectionView!
-    
+//    CHIPageControlJalapeno
+//    @IBOutlet weak var onboardingPageControl: UIPageControl!
+    @IBOutlet weak var onboardingPageControl: CHIPageControlJalapeno!
     @IBOutlet weak var nextButton: UIButton!
     
     var currentIndex = 0
@@ -65,7 +67,7 @@ class OnboardingViewController: UIViewController {
         if currentIndex != 2 {
             onboardingCollectionView.scrollToItem(at: IndexPath(item: currentIndex + 1, section: 0), at: .left, animated: false)
             currentIndex += 1
-            onboardingPageControl.currentPage = currentIndex
+//            onboardingPageControl.currentPage = currentIndex
             let title = onboardingDetails?[currentIndex]["title"] as? String
             titleLabel.text = title
         } else {

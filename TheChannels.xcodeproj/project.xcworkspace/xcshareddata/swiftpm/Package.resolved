@@ -1,6 +1,15 @@
 {
-  "originHash" : "162bc281f7661be070142490785b80dc4accf40f937a06fe2e3f36cb4a97c02c",
+  "originHash" : "71fcd7550a595d50e4bfca1c46c20ee001b8b6383818f017fa9cfe3dca21f328",
   "pins" : [
+    {
+      "identity" : "chipagecontrol",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ChiliLabs/CHIPageControl.git",
+      "state" : {
+        "revision" : "2d16f651a6c885e8d7eff21b36bd1cae3130aa10",
+        "version" : "0.2.1"
+      }
+    },
     {
       "identity" : "iosdropdown",
       "kind" : "remoteSourceControl",
