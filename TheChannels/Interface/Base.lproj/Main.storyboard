@@ -811,7 +811,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6wq-Oq-YxQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="387.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="383.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="c9U-PM-a6M">
                                     <size key="itemSize" width="128" height="128"/>
@@ -821,6 +821,14 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vga-dF-69O">
+                                <rect key="frame" x="137.5" y="438.5" width="100" height="30"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="O4H-IK-ydg"/>
+                                    <constraint firstAttribute="width" constant="100" id="hcY-i2-Rec"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,000+ Happy User" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBR-e2-v03">
                                 <rect key="frame" x="134" y="486.5" width="167.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -834,36 +842,27 @@
                                     <constraint firstAttribute="width" constant="25" id="tUK-vt-p6L"/>
                                 </constraints>
                             </imageView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" restorationIdentifier="onboardingPageControl" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="8Vd-dl-1NZ" customClass="CHIPageControl" customModule="TheChannels" customModuleProvider="target">
-                                <rect key="frame" x="142.5" y="442.5" width="90" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="M8X-Ma-LHX"/>
-                                    <constraint firstAttribute="height" constant="26" id="sUh-OX-ONp"/>
-                                </constraints>
-                                <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="currentPageIndicatorTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </pageControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QTy-Yj-YAO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Vd-dl-1NZ" firstAttribute="top" secondItem="6wq-Oq-YxQ" secondAttribute="bottom" constant="35" id="48d-5B-MHr"/>
-                            <constraint firstItem="8Vd-dl-1NZ" firstAttribute="centerX" secondItem="QTy-Yj-YAO" secondAttribute="centerX" id="6Dl-H0-Ery"/>
                             <constraint firstItem="5Uy-56-iJj" firstAttribute="top" secondItem="BEQ-at-Uon" secondAttribute="bottom" constant="20" id="DCc-xJ-7P9"/>
                             <constraint firstItem="5Uy-56-iJj" firstAttribute="leading" secondItem="QTy-Yj-YAO" secondAttribute="leading" constant="21" id="E5H-XN-v5q"/>
                             <constraint firstItem="6wq-Oq-YxQ" firstAttribute="top" secondItem="QTy-Yj-YAO" secondAttribute="top" id="GlW-KL-P8n"/>
                             <constraint firstItem="BEQ-at-Uon" firstAttribute="top" secondItem="zBR-e2-v03" secondAttribute="bottom" constant="15" id="Izl-Lw-WjK"/>
                             <constraint firstItem="QTy-Yj-YAO" firstAttribute="trailing" secondItem="5Uy-56-iJj" secondAttribute="trailing" constant="21" id="Jlg-O6-IA7"/>
-                            <constraint firstItem="zBR-e2-v03" firstAttribute="top" secondItem="8Vd-dl-1NZ" secondAttribute="bottom" constant="18" id="Q21-cC-29n"/>
                             <constraint firstAttribute="trailing" secondItem="BEQ-at-Uon" secondAttribute="trailing" constant="8" id="QX3-6G-im3"/>
                             <constraint firstItem="6wq-Oq-YxQ" firstAttribute="trailing" secondItem="QTy-Yj-YAO" secondAttribute="trailing" id="TVA-pj-SVl"/>
                             <constraint firstItem="zBR-e2-v03" firstAttribute="centerX" secondItem="z4q-cK-hY1" secondAttribute="centerX" constant="30" id="aT9-th-WQ7"/>
                             <constraint firstItem="QTy-Yj-YAO" firstAttribute="bottom" secondItem="5Uy-56-iJj" secondAttribute="bottom" constant="20" id="cNF-Wo-SGx"/>
                             <constraint firstItem="6wq-Oq-YxQ" firstAttribute="leading" secondItem="QTy-Yj-YAO" secondAttribute="leading" id="fWn-xv-Cm8"/>
+                            <constraint firstItem="vga-dF-69O" firstAttribute="centerX" secondItem="QTy-Yj-YAO" secondAttribute="centerX" id="lL8-3S-MHl"/>
                             <constraint firstItem="6wq-Oq-YxQ" firstAttribute="top" secondItem="QTy-Yj-YAO" secondAttribute="top" id="mPq-Ug-daN"/>
                             <constraint firstItem="QTy-Yj-YAO" firstAttribute="trailing" secondItem="6wq-Oq-YxQ" secondAttribute="trailing" id="oFz-mt-dVb"/>
+                            <constraint firstItem="zBR-e2-v03" firstAttribute="top" secondItem="vga-dF-69O" secondAttribute="bottom" constant="18" id="pbZ-7r-WcD"/>
                             <constraint firstItem="Ry3-Nk-YVA" firstAttribute="centerY" secondItem="zBR-e2-v03" secondAttribute="centerY" id="qGE-yW-TsV"/>
                             <constraint firstItem="BEQ-at-Uon" firstAttribute="leading" secondItem="QTy-Yj-YAO" secondAttribute="leading" constant="8" id="sFy-JH-8H8"/>
+                            <constraint firstItem="vga-dF-69O" firstAttribute="top" secondItem="6wq-Oq-YxQ" secondAttribute="bottom" constant="35" id="t9w-xz-R1a"/>
                             <constraint firstItem="zBR-e2-v03" firstAttribute="leading" secondItem="Ry3-Nk-YVA" secondAttribute="trailing" constant="12" id="w0C-D6-mog"/>
                             <constraint firstItem="6wq-Oq-YxQ" firstAttribute="leading" secondItem="QTy-Yj-YAO" secondAttribute="leading" id="yN0-wl-E3O"/>
                         </constraints>
@@ -871,7 +870,7 @@
                     <connections>
                         <outlet property="nextButton" destination="5Uy-56-iJj" id="A3f-fq-aYs"/>
                         <outlet property="onboardingCollectionView" destination="6wq-Oq-YxQ" id="ztU-QD-X9F"/>
-                        <outlet property="onboardingPageControl" destination="8Vd-dl-1NZ" id="Mfu-gw-cNd"/>
+                        <outlet property="pageControllerView" destination="vga-dF-69O" id="Ja7-Aa-vPP"/>
                         <outlet property="titleLabel" destination="BEQ-at-Uon" id="j4m-pn-0AS"/>
                     </connections>
                 </viewController>

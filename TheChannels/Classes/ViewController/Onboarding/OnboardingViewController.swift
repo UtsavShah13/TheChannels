@@ -10,12 +10,15 @@ import CHIPageControl
 
 class OnboardingViewController: UIViewController {
     
+    @IBOutlet weak var pageControllerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var onboardingCollectionView: UICollectionView!
 //    CHIPageControlJalapeno
 //    @IBOutlet weak var onboardingPageControl: UIPageControl!
-    @IBOutlet weak var onboardingPageControl: CHIPageControlJalapeno!
     @IBOutlet weak var nextButton: UIButton!
+    internal let numberOfPages = 4
+    var pageControl: CHIPageControlJaloro!
+
     
     var currentIndex = 0
     var onboardingDetails: [[String : Any]]?
@@ -30,9 +33,20 @@ class OnboardingViewController: UIViewController {
     
     func setupUI() {
         nextButton.layer.cornerRadius = 8
-        onboardingPageControl.numberOfPages = intoImages.count
         let title = onboardingDetails?[currentIndex]["title"] as? String
         titleLabel.text = title
+        
+        
+        // Initialize CHIPageControl
+        pageControl = CHIPageControlJaloro(frame: CGRect(x: 0, y: 0, width: pageControllerView.frame.width, height: pageControllerView.frame.height))
+        pageControl.numberOfPages = intoImages.count
+        pageControl.radius = 4
+        pageControl.tintColor = .lightGray
+        pageControl.currentPageTintColor = .black
+        pageControl.padding = 6
+        
+        // Add to the view
+        pageControllerView.addSubview(pageControl)
     }
     
     func setupCollectionView() {
@@ -67,7 +81,7 @@ class OnboardingViewController: UIViewController {
         if currentIndex != 2 {
             onboardingCollectionView.scrollToItem(at: IndexPath(item: currentIndex + 1, section: 0), at: .left, animated: false)
             currentIndex += 1
-//            onboardingPageControl.currentPage = currentIndex
+            pageControl.set(progress: currentIndex, animated: true)
             let title = onboardingDetails?[currentIndex]["title"] as? String
             titleLabel.text = title
         } else {
