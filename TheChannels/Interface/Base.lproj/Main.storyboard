@@ -1316,7 +1316,9 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="FeatureListCollectionCell" reuseIdentifier="FeatureListCollectionCell" translatesAutoresizingMaskIntoConstraints="NO" id="iPm-H0-6TT" userLabel="FeatureListCollectionCell" customClass="FeatureListCollectionCell" customModule="TheChannels" customModuleProvider="target">
+                                                            <rect key="frame" x="-322.5" y="0.0" width="979.5" height="1116"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="979.5" height="1116"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6g-Sr-MUN">

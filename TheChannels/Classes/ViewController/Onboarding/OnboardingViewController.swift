@@ -13,16 +13,11 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var pageControllerView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var onboardingCollectionView: UICollectionView!
-//    CHIPageControlJalapeno
-//    @IBOutlet weak var onboardingPageControl: UIPageControl!
     @IBOutlet weak var nextButton: UIButton!
-    internal let numberOfPages = 4
-    var pageControl: CHIPageControlJaloro!
 
-    
+    var pageControl: CHIPageControlJaloro!
     var currentIndex = 0
     var onboardingDetails: [[String : Any]]?
-    var intoImages = ["icintro_0", "icintro_1", "icintro_2"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +31,9 @@ class OnboardingViewController: UIViewController {
         let title = onboardingDetails?[currentIndex]["title"] as? String
         titleLabel.text = title
         
-        
         // Initialize CHIPageControl
         pageControl = CHIPageControlJaloro(frame: CGRect(x: 0, y: 0, width: pageControllerView.frame.width, height: pageControllerView.frame.height))
-        pageControl.numberOfPages = intoImages.count
+        pageControl.numberOfPages = onboardingDetails?.count ?? 0
         pageControl.radius = 4
         pageControl.tintColor = .lightGray
         pageControl.currentPageTintColor = .black
@@ -56,14 +50,13 @@ class OnboardingViewController: UIViewController {
         onboardingCollectionView.register(cell: Cell.onboardingCell)
         
         let layout = UICollectionViewFlowLayout()
-               layout.scrollDirection = .horizontal // For horizontal scrolling
-               layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height) // Full screen size
-               layout.minimumLineSpacing = 0 // No spacing between cells
-            
+        layout.scrollDirection = .horizontal // For horizontal scrolling
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height) // Full screen size
+        layout.minimumLineSpacing = 0 // No spacing between cells
+        
         onboardingCollectionView.collectionViewLayout = layout
         onboardingCollectionView.isPagingEnabled = true // Enable paging
         onboardingCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        onboardingCollectionView.isScrollEnabled = false
         onboardingCollectionView.showsHorizontalScrollIndicator = false
         
     }
@@ -76,18 +69,36 @@ class OnboardingViewController: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
+    func updateUIForCurrentIndex() {
+        // Update the title label
+        let title = onboardingDetails?[currentIndex]["title"] as? String
+        titleLabel.text = title
+
+        pageControl.set(progress: currentIndex, animated: true)
+
+        print("UI updated for index:", currentIndex, "Title:", title ?? "No title")
+    }
 
     @IBAction func nextButtonAction(_ sender: Any) {
         if currentIndex != 2 {
-            onboardingCollectionView.scrollToItem(at: IndexPath(item: currentIndex + 1, section: 0), at: .left, animated: false)
             currentIndex += 1
-            pageControl.set(progress: currentIndex, animated: true)
-            let title = onboardingDetails?[currentIndex]["title"] as? String
-            titleLabel.text = title
+            
+            // Disable user interaction during programmatic scroll
+            onboardingCollectionView.isPagingEnabled = false
+            onboardingCollectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
+
+            // Re-enable after animation
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.onboardingCollectionView.isPagingEnabled = true
+            }
+            
+            updateUIForCurrentIndex()
         } else {
             moveToNotificationVC()
         }
     }
+    
 }
 
 //    MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -103,4 +114,13 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         cell.imageView.image = UIImage(named: imageName)
         return cell
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let visibleRect = CGRect(origin: onboardingCollectionView.contentOffset, size: onboardingCollectionView.bounds.size)
+        if let visibleIndexPath = onboardingCollectionView.indexPathForItem(at: CGPoint(x: visibleRect.midX, y: visibleRect.midY)) {
+            currentIndex = visibleIndexPath.item
+            updateUIForCurrentIndex()
+        }
+    }
+
 }
