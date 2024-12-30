@@ -10,6 +10,7 @@ import iOSDropDown
 
 class AddChannelViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var numberView: UIView!
     @IBOutlet weak var countryCodeiOSDropDown: DropDown!
     @IBOutlet weak var phoneNumberTextField: UITextField!
@@ -96,6 +97,14 @@ class AddChannelViewController: UIViewController {
             numberView.borderColor = .systemGray
         }
         
+        addDoneButtonToKeyboard(for: titleTextField)
+        addDoneButtonToKeyboard(for: descriptionTextView)
+        addDoneButtonToKeyboard(for: linkTextField)
+
+        // Add keyboard observers
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
         roundedTextFields(textField: titleTextField)
         roundedTextFields(textField: linkTextField)
         roundedTextFields(textField: categoryiOSDropDown)
@@ -140,6 +149,28 @@ class AddChannelViewController: UIViewController {
         }
         
     }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+           if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+               let keyboardHeight = keyboardFrame.height
+               let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+               scrollView.contentInset = contentInsets
+               scrollView.scrollIndicatorInsets = contentInsets
+               
+               // Scroll to make the textView visible
+               var visibleRect = view.frame
+               visibleRect.size.height -= keyboardHeight
+               if !visibleRect.contains(descriptionTextView.frame.origin) {
+                   scrollView.scrollRectToVisible(descriptionTextView.frame, animated: true)
+               }
+           }
+       }
+       
+       @objc func keyboardWillHide(notification: Notification) {
+           // Reset scroll view insets
+           scrollView.contentInset = .zero
+           scrollView.scrollIndicatorInsets = .zero
+       }
     
     func roundedTextFields(textField: UITextField) {
         textField.layer.cornerRadius = 8
@@ -202,6 +233,30 @@ class AddChannelViewController: UIViewController {
             popoverController.sourceView = sender
         }
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func addDoneButtonToKeyboard(for input: UIResponder) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        // Create the Done button
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTappedFromKeyboard))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        // Add the buttons to the toolbar
+        toolbar.items = [flexSpace, doneButton]
+        
+        // Assign the toolbar as the inputAccessoryView
+        if let textField = input as? UITextField {
+            textField.inputAccessoryView = toolbar
+        } else if let textView = input as? UITextView {
+            textView.inputAccessoryView = toolbar
+        }
+    }
+    
+    @objc func doneButtonTappedFromKeyboard() {
+        // Dismiss the keyboard for any responder
+        view.endEditing(true)
     }
     
 //    MARK: - Button Action
